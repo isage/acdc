@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cxml version="0x0110" magic="RCSF">
+    <element name="stringset"/>
+    <element name="string" parents="stringset" attributes="src:wstring, id:idhash"/>
+</cxml>

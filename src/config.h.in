@@ -1,0 +1,15 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#define VERSION "@acdc_VERSION_MAJOR@.@acdc_VERSION_MINOR@.@acdc_VERSION_PATCH@.@acdc_VERSION_RELEASE@"
+
+#define VERSION_MAJOR "@acdc_VERSION_MAJOR@"
+
+#define VERSION_MINOR "@acdc_VERSION_MINOR@"
+
+#define VERSION_PATCH "@acdc_VERSION_PATCH@"
+
+#define VERSION_RELEASE "@acdc_VERSION_PATCH@"
+
+#endif
+
