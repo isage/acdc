@@ -500,19 +500,19 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
             {
                 default: break;
                 case cxml::Attr::None: break; // TODO: error
-                case cxml::Attr::Int: break;
+                case cxml::Attr::Int:
                 {
                     attr.offset = el->IntAttribute(v.name.c_str());
                     attr.size = 0;
                     break;
                 }
-                case cxml::Attr::Float: break;
+                case cxml::Attr::Float:
                 {
                     attr.offset = (uint32_t)el->FloatAttribute(v.name.c_str());
                     attr.size = 0;
                     break;
                 }
-                case cxml::Attr::String: break;
+                case cxml::Attr::String:
                 {
                     attr.offset = push_to_string_table(el->Attribute(v.name.c_str()));
                     attr.size = strlen(el->Attribute(v.name.c_str()));
