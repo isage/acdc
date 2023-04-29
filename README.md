@@ -11,5 +11,5 @@ Another CXML (De)Compiler
 cxml decompilation with rcd support
 
 ## Credits
-[PoS](https://github.com/Princess-of-Sleeping) for rco decompiler
-[Graphene](https://github.com/GrapheneCt) for rcs/rco schema
+* [PoS](https://github.com/Princess-of-Sleeping) for rco decompiler
+* [Graphene](https://github.com/GrapheneCt) for rcs/rco schema
