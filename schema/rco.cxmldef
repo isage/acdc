@@ -62,11 +62,11 @@
     <element name="templatetable" parents="resource" />
     <element name="template" parents="templatetable" attributes="fast_open:int, id:hash" />
     <element name="stringtable" parents="resource" />
-    <element name="locale" parents="stringtable" attributes="origsize:int, src:filename, compress:string, id:id" />
+    <element name="locale" parents="stringtable" attributes="origsize:int, src:file, compress:string, id:id" />
     <element name="texturetable" parents="resource" />
     <element name="filetable" parents="resource" />
-    <element name="file" parents="filetable" attributes="origsize:int, src:filename, compress:string, id:idhash, type:string" />
-    <element name="texture" parents="texturetable" attributes="src:filename, margin_h:intarray, ignore_make_surface_first:string, origsize:int, type:string, id:idhash, div_ratio_h:float, compress:string, margin_v:intarray, div_mode:string" />
+    <element name="file" parents="filetable" attributes="origsize:int, src:file, compress:string, id:idhash, type:string" />
+    <element name="texture" parents="texturetable" attributes="src:file, margin_h:intarray, ignore_make_surface_first:string, origsize:int, type:string, id:idhash, div_ratio_h:float, compress:string, margin_v:intarray, div_mode:string" />
     <element name="soundindextable" parents="resource" />
     <element name="sound_button" parents="soundindextable" attributes="id:idhash, decide:idhash" />
 </cxml>
