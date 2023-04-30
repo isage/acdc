@@ -393,17 +393,24 @@ std::tuple<uint32_t,uint32_t,uint32_t> Compiler::push_to_file_table(const char* 
 
             if (res != Z_OK)
             {
-                printf("Can't compress %s\n", p.c_str());
-                exit(-1);
+                printf("Warning: can't compress %s. Adding as-is\n", p.c_str());
+                for(size_t i = 0; i < filesize;i++)
+                {
+                    file_table_bin.push_back(buf[i]);
+                }
+                binarray_align(file_table_bin, 16);
             }
-            for(size_t i = 0; i < compressed_size;i++)
+            else
             {
-                file_table_bin.push_back(zbuf[i]);
+                for(size_t i = 0; i < compressed_size;i++)
+                {
+                    file_table_bin.push_back(zbuf[i]);
+                }
+                binarray_align(file_table_bin, 16);
             }
-            binarray_align(file_table_bin, 16);
             free(zbuf);
         } else {
-            for(size_t i = 0; i < compressed_size;i++)
+            for(size_t i = 0; i < filesize;i++)
             {
                 file_table_bin.push_back(buf[i]);
             }
