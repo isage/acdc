@@ -1,6 +1,9 @@
 #include "decompiler.h"
 #include <zlib.h>
 #include <filesystem>
+#include <fstream>
+#include <sstream>
+
 
 namespace fs = std::filesystem;
 
@@ -49,6 +52,14 @@ namespace cxml {
       uint32_t data;
       fread(&data, 4, 1, fp);
       char cdata[16];
+
+      if (_rcd_table.count(cdata))
+      {
+        sprintf(cdata, "%08x", data);
+        attr_name = _rcd_table.at(cdata).at("id");
+        return attr_name;
+      }
+
       sprintf(cdata, "0x%08x", data);
       attr_name = cdata;
       return attr_name;
@@ -62,9 +73,16 @@ namespace cxml {
       uint32_t data;
       fread(&data, 4, 1, fp);
 
-      // todo: if we have .rcd - search for corresponding id
-
       char cdata[16];
+
+      //if we have .rcd - search for corresponding id
+      if (_rcd_table.count(cdata))
+      {
+        sprintf(cdata, "%08x", data);
+        attr_name = _rcd_table.at(cdata).at("id");
+        return attr_name;
+      }
+
       sprintf(cdata, "0x%08x", data);
       attr_name = cdata;
       return attr_name;
@@ -122,9 +140,19 @@ namespace cxml {
 
   void Decompiler::extract_from_filetable(std::string name, int32_t handle, int32_t size, bool compressed, uint32_t orig_size)
   {
+      fs::path p(name);
+      fs::create_directories(fs::absolute(p.remove_filename()));
+
       fseek(fp, header.filetable_offset + handle, SEEK_SET);
       uint8_t* file = (uint8_t*)malloc(size);
       fread(file, size, 1, fp);
+
+      if (orig_size == 0)
+      {
+            printf("Error: failed to decompress file %s!", name.c_str());
+            free(file);
+            exit(-1);
+      }
 
       if (compressed)
       {
@@ -134,6 +162,7 @@ namespace cxml {
         if (ret != Z_OK)
         {
             printf("Error: failed to decompress file %s!", name.c_str());
+            free(file);
             exit(-1);
         }
         FILE* out = fopen(name.c_str(), "wb");
@@ -174,6 +203,7 @@ namespace cxml {
         uint32_t file_offset = 0;
         std::string file_attr_name;
         bool file_compress = false;
+
         for(int i = 0; i < theader->num_attributes; i++)
         {
             cxml::TagAttr* attr = (cxml::TagAttr*)(tree + tree_offset);
@@ -204,7 +234,9 @@ namespace cxml {
                 {
                     val = get_from_stringtable(attr->offset);
                     if (attr_name.compare("compress") == 0 && val.compare("on") == 0)
+                    {
                         file_compress = true;
+                    }
                     break;
                 }
                 case cxml::Attr::WString:
@@ -265,8 +297,15 @@ namespace cxml {
         // check if we have file and unpack if needed
         if(is_file)
         {
-           std::string val = std::to_string(file_offset) + std::string(".bin");
+           std::string val = std::string(el->Attribute("id")) + std::string(".bin");
            // todo: if we have filename from rcd - update it
+           if (_rcd_table.count(el->Attribute("id")))
+           {
+             if (_rcd_table.at(el->Attribute("id")).count("src"))
+             {
+                val = _rcd_table.at(el->Attribute("id")).at("src");
+             }
+           }
            extract_from_filetable(_outdir + val, file_offset, file_size, file_compress, file_orig_size);
            // update attr
            el->SetAttribute(file_attr_name.c_str(), val.c_str());
@@ -288,6 +327,34 @@ namespace cxml {
     }
   }
 
+  void Decompiler::parse_rcd()
+  {
+    if (!_rcd.empty())
+    {
+        std::ifstream rcdf(_rcd);
+        if (!rcdf.is_open()) return;
+        std::string line;
+        while (std::getline(rcdf, line))
+        {
+            if(!line.empty() && line[0] != '#')
+            {
+                std::vector<std::string> tokens = split(line, ' ');
+                std::vector<std::string> keyhash = split(tokens[0], ':');
+                std::vector<std::string> attrs = split(tokens[1], ',');
+                std::string key = keyhash[1].substr(0, keyhash[1].find("("));
+
+                std::map<std::string, std::string> attrmap;
+
+                for (auto& a: attrs)
+                {
+                    std::vector<std::string> attrval = split(a,':');
+                    attrmap.emplace(attrval[0], attrval[1]);
+                }
+                _rcd_table.emplace(key, attrmap);
+            }
+        }
+    }
+  }
 
   bool Decompiler::decompile(std::string out)
   {
@@ -301,6 +368,7 @@ namespace cxml {
         std::cout << "Can't open cxml file " << _cxml << std::endl;
         return false;
     }
+
     size_t result = fread(&header, sizeof(cxml::Header), 1, fp);
     if (result < 1)
     {
@@ -316,6 +384,9 @@ namespace cxml {
         std::cout << "Malformed cxml file" << std::endl;
         return false;
     }
+
+    // parse rcd if we have one
+    parse_rcd();
 
     tinyxml2::XMLDocument doc;
     doc.InsertEndChild(doc.NewDeclaration());

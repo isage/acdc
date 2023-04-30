@@ -31,6 +31,12 @@ class Decompiler {
     std::string get_from_idtable(int32_t handle);
     void extract_from_filetable(std::string filename, int32_t handle, int32_t size, bool compressed = false, uint32_t file_orig_size = 0);
 
+    void parse_rcd();
+    std::map<
+        std::string,
+        std::map<std::string,std::string>
+    > _rcd_table;
+
     std::string _cxml;
     std::string _rcd;
     std::string _outdir;

@@ -370,7 +370,8 @@ std::tuple<uint32_t,uint32_t,uint32_t> Compiler::push_to_file_table(const char* 
             exit(-1);
         }
         fseek(fp, 0, SEEK_END);
-        compressed_size = filesize = ftell(fp);
+        filesize = ftell(fp);
+        compressed_size = filesize;
 
         fseek(fp, 0, SEEK_SET);
 
@@ -380,8 +381,12 @@ std::tuple<uint32_t,uint32_t,uint32_t> Compiler::push_to_file_table(const char* 
 
         if (docompress)
         {
-            uint8_t* zbuf = (uint8_t*)malloc(compressBound(filesize));
+            compressed_size = compressBound(filesize);
+            uint8_t* zbuf = (uint8_t*)malloc(compressed_size);
+            uint32_t fz = filesize;
             int res = compress(zbuf, (uLongf*)&compressed_size, buf, filesize);
+            filesize = fz;
+
             if (res != Z_OK)
             {
                 printf("Can't compress %s\n", path);
@@ -403,6 +408,7 @@ std::tuple<uint32_t,uint32_t,uint32_t> Compiler::push_to_file_table(const char* 
 
         free(buf);
         free(path);
+        file_table.emplace(path, std::make_tuple(offset, compressed_size, filesize));
         return {offset, compressed_size, filesize};
     }
     else
@@ -482,6 +488,7 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
     bool is_file = false;
     uint32_t hash = 0;
     std::string key;
+    std::string id;
 
     // check attr validity
     for (auto& v: elem_schema.attributes)
@@ -489,6 +496,7 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
         const tinyxml2::XMLAttribute *a = el->FindAttribute(v.name.c_str());
         if (!a)
         {
+            tag->th.num_attributes--;
             continue;
         }
         else
@@ -556,7 +564,6 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
                     {
                         // offset, size, origsize
                         std::tuple<uint32_t, uint32_t, uint32_t> oscs = push_to_file_table(el->Attribute(v.name.c_str()), true);
-
                         const tinyxml2::XMLAttribute *origsize_el = el->FindAttribute("origsize");
                         if(!origsize_el) // if we already have origsize attr - don't overwrite it
                         {
@@ -567,6 +574,7 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
                             orig_size_attr.size = 0;
                             tree_table_size += sizeof(cxml::TagAttr);
                             tag->kv.push_back(orig_size_attr);
+                            tag->th.num_attributes++;
                         }
                         attr.offset = std::get<0>(oscs);
                         attr.size = std::get<1>(oscs);
@@ -584,6 +592,8 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
                 {
                     attr.offset = push_to_id_table(el->Attribute(v.name.c_str()), tag->offset);
                     attr.size = 0;
+                    id = el->Attribute(v.name.c_str());
+                    key = el->Attribute(v.name.c_str());
                     break;
                 }
                 case cxml::Attr::IDRef:
@@ -629,6 +639,22 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
         else
         {
             rcd_table.push_back(std::string("key:") + std::string(h) + std::string(" id:")+key);
+        }
+    }
+    else if (!id.empty())
+    {
+        if (is_file && el->Attribute("src") && el->Attribute("type"))
+        {
+            rcd_table.push_back(
+                std::string("key:") + id
+                + std::string(" id:") + key
+                + std::string(",src:") + std::string(el->Attribute("src"))
+                + std::string(",type:") + std::string(el->Attribute("type"))
+            );
+        }
+        else
+        {
+            rcd_table.push_back(std::string("key:") + id + std::string(" id:")+key);
         }
     }
 
