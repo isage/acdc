@@ -155,7 +155,7 @@ uint32_t Compiler::push_to_id_table(const char* value, uint32_t entity_offset )
     }
     else
     {
-        // if table at offset == 0xFFFFFFFF - update that 0 to offset, else error
+        // if table at offset == 0xFFFFFFFF - update that to offset, else error
         uint32_t offset = id_table.at(value);
         if (*(uint32_t*)((uint8_t*)id_table_bin.data() + offset) == 0xFFFFFFFF)
         {
@@ -337,10 +337,12 @@ uint32_t Compiler::push_to_hash_table(const char* value)
     }
     else
     {
-        // error
-        printf("%s has duplicate hash\n", value);
-        exit(-1);
-//        return hash_table.at(nid);
+        // warning
+        if (!hash_table_origin.count(value))
+            printf("Warning: %s has duplicate hash 0x%08x\n", value, nid);
+        else
+            hash_table_origin.emplace(value, true);
+        return hash_table.at(nid);
     }
 }
 

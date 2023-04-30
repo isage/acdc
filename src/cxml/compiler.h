@@ -49,6 +49,7 @@ class Compiler {
 
     std::map<uint32_t, uint32_t> hash_table;
     std::vector<uint8_t> hash_table_bin = {};
+    std::map<std::string, bool> hash_table_origin;
 
     std::map<std::string, std::tuple<uint32_t, uint32_t, uint32_t>> file_table;
     std::vector<uint8_t> file_table_bin = {};
