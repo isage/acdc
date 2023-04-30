@@ -350,23 +350,27 @@ uint32_t Compiler::push_to_hash_table(const char* value, uint32_t* hash)
 
 std::tuple<uint32_t,uint32_t,uint32_t> Compiler::push_to_file_table(const char* value, bool docompress)
 {
-    char* path = realpath(value, NULL);
-    if (!path)
+    fs::path p = fs::absolute(_xml_file);
+    p = p.remove_filename();
+    p /= fs::path(value);
+    p = fs::absolute(p);
+
+    if (p.empty())
     {
         printf("File `%s` doesn't exist\n", value);
         exit(-1);
     }
 
-    if(file_table.count(path) == 0)
+    if(file_table.count(p) == 0)
     {
         uint32_t filesize = 0;
         uint32_t compressed_size = 0;
         uint32_t offset = file_table_bin.size();
 
-        FILE* fp = fopen(path, "rb");
+        FILE* fp = fopen(p.c_str(), "rb");
         if (!fp)
         {
-            printf("Can't open %s\n", path);
+            printf("Can't open %s\n", p.c_str());
             exit(-1);
         }
         fseek(fp, 0, SEEK_END);
@@ -389,7 +393,7 @@ std::tuple<uint32_t,uint32_t,uint32_t> Compiler::push_to_file_table(const char* 
 
             if (res != Z_OK)
             {
-                printf("Can't compress %s\n", path);
+                printf("Can't compress %s\n", p.c_str());
                 exit(-1);
             }
             for(size_t i = 0; i < compressed_size;i++)
@@ -407,21 +411,15 @@ std::tuple<uint32_t,uint32_t,uint32_t> Compiler::push_to_file_table(const char* 
         }
 
         free(buf);
-        free(path);
-        file_table.emplace(path, std::make_tuple(offset, compressed_size, filesize));
+        file_table.emplace(p, std::make_tuple(offset, compressed_size, filesize));
         return {offset, compressed_size, filesize};
     }
     else
     {
-        std::tuple<uint32_t,uint32_t,uint32_t> ret = file_table.at(path);
-        free(path);
+        std::tuple<uint32_t,uint32_t,uint32_t> ret = file_table.at(p);
         return ret;
     }
 }
-
-
-// todo:
-// file table
 
 cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, cxml::Tag* parenttag)
 {
