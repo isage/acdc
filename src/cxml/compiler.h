@@ -67,7 +67,7 @@ class Compiler {
     uint32_t push_to_idref_table(const char* value, uint32_t entity_offset);
     uint32_t push_to_idhash_table(const char* value, uint32_t entity_offset, uint32_t* hash);
     uint32_t push_to_idhashref_table(const char* value, uint32_t entity_offset);
-    uint32_t push_to_hash_table(const char* value);
+    uint32_t push_to_hash_table(const char* value, uint32_t* hash);
     std::pair<uint32_t, uint32_t> push_to_intarray_table(const char* value);
     std::pair<uint32_t, uint32_t> push_to_floatarray_table(const char* value);
     std::tuple<uint32_t, uint32_t, uint32_t> push_to_file_table(const char* value, bool docompress);

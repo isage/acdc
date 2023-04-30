@@ -309,7 +309,7 @@ uint32_t Compiler::push_to_idhashref_table(const char* value, uint32_t entity_of
     }
 }
 
-uint32_t Compiler::push_to_hash_table(const char* value)
+uint32_t Compiler::push_to_hash_table(const char* value, uint32_t* hash)
 {
     SHA1_CTX ctx;
     SHA1Init(&ctx);
@@ -321,6 +321,8 @@ uint32_t Compiler::push_to_hash_table(const char* value)
     SHA1Final(sha1, &ctx);
 
     uint32_t nid = (sha1[3] << 24) | (sha1[2] << 16) | (sha1[1] << 8) | sha1[0];
+
+    *hash = nid;
 
     if(hash_table.count(nid) == 0)
     {
@@ -487,9 +489,7 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
         const tinyxml2::XMLAttribute *a = el->FindAttribute(v.name.c_str());
         if (!a)
         {
-//            printf("Malformed cxml file, line %d, element `%s` doesn't have attribute `%s`\n", el->GetLineNum(), el->Value(), v.name.c_str());
             continue;
-//            return NULL;
         }
         else
         {
@@ -529,7 +529,7 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
                 }
                 case cxml::Attr::Hash:
                 {
-                    attr.offset = push_to_hash_table(el->Attribute(v.name.c_str()));
+                    attr.offset = push_to_hash_table(el->Attribute(v.name.c_str()), &hash);
                     attr.size = 4;
                     break;
                 }
