@@ -3,10 +3,10 @@ include(CheckCXXCompilerFlag)
 
 project(acdc)
 
-set(acdc_VERSION_MAJOR 0)
-set(acdc_VERSION_MINOR 1)
+set(acdc_VERSION_MAJOR 1)
+set(acdc_VERSION_MINOR 0)
 set(acdc_VERSION_PATCH 0)
-set(acdc_VERSION_RELEASE 0)
+set(acdc_VERSION_RELEASE 1)
 
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
