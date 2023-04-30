@@ -32,7 +32,7 @@ class Compiler {
     std::map<std::string, uint32_t> string_table;
     std::vector<uint8_t> string_table_bin = {};
 
-    std::map<std::string, uint32_t> wstring_table;
+    std::map<std::string, std::pair<uint32_t, uint32_t>> wstring_table;
     std::vector<uint8_t> wstring_table_bin = {};
 
     uint32_t intarray_table_size = 0;
@@ -62,7 +62,7 @@ class Compiler {
 
     uint32_t push_to_string_table(const char* value);
     uint32_t push_to_string_table(std::string value); // todo: remove?
-    uint32_t push_to_wstring_table(const char* value);
+    std::pair<uint32_t,uint32_t> push_to_wstring_table(const char* value);
     uint32_t push_to_id_table(const char* value, uint32_t entity_offset);
     uint32_t push_to_idref_table(const char* value, uint32_t entity_offset);
     uint32_t push_to_idhash_table(const char* value, uint32_t entity_offset, uint32_t* hash);

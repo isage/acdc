@@ -37,23 +37,25 @@ uint32_t Compiler::push_to_string_table(std::string value)
     return push_to_string_table(value.c_str());
 }
 
-uint32_t Compiler::push_to_wstring_table(const char* value)
+std::pair<uint32_t,uint32_t> Compiler::push_to_wstring_table(const char* value)
 {
     if(wstring_table.count(value) == 0)
     {
         uint32_t offset = wstring_table_bin.size() / 2;
-        wstring_table.emplace(value, offset);
 
+        uint32_t len = 0;
         for (int i = 0; value[i];) {
             uint8_t character[2];
             i += utf8_to_ucs2(&value[i], (uint16_t*)character);
             wstring_table_bin.push_back(character[0]);
             wstring_table_bin.push_back(character[1]);
+            len+=2;
         }
 
         wstring_table_bin.push_back(0);
         wstring_table_bin.push_back(0);
-        return offset;
+        wstring_table.emplace(value, std::make_pair(offset, len));
+        return {offset, len};
     }
     else
     {
@@ -84,7 +86,7 @@ std::pair<uint32_t,uint32_t> Compiler::push_to_intarray_table(const char* value)
     }
     if (offset > 0)
     {
-        return {offset, values.size()};
+        return {offset / 4, values.size()};
     }
 
     offset = intarray_table_size / 4;
@@ -118,7 +120,7 @@ std::pair<uint32_t,uint32_t> Compiler::push_to_floatarray_table(const char* valu
     }
     if (offset > 0)
     {
-        return {offset, values.size()};
+        return {offset / 4, values.size()};
     }
 
     offset = floatarray_table_size / 4;
@@ -545,8 +547,9 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
                 }
                 case cxml::Attr::WString:
                 {
-                    attr.offset = push_to_wstring_table(el->Attribute(v.name.c_str()));
-                    attr.size = strlen(el->Attribute(v.name.c_str())) * 2;
+                    auto t = push_to_wstring_table(el->Attribute(v.name.c_str()));
+                    attr.offset = t.first;
+                    attr.size = t.second;
                     break;
                 }
                 case cxml::Attr::Hash:
