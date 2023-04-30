@@ -206,7 +206,7 @@ uint32_t Compiler::push_to_idhash_table(const char* value, uint32_t entity_offse
     // if it's hex value, treat as nid
     uint32_t nid;
     try {
-        nid = std::stol(value, nullptr, 16);
+        nid = std::stol(value, nullptr);
     }
     catch(std::invalid_argument& e)
     {
@@ -267,7 +267,7 @@ uint32_t Compiler::push_to_idhashref_table(const char* value, uint32_t entity_of
     // if it's hex value, treat as nid
     uint32_t nid;
     try {
-        nid = std::stol(value, nullptr, 16);
+        nid = std::stol(value, nullptr);
     }
     catch(std::invalid_argument& e)
     {
@@ -311,29 +311,38 @@ uint32_t Compiler::push_to_idhashref_table(const char* value, uint32_t entity_of
 
 uint32_t Compiler::push_to_hash_table(const char* value, uint32_t* hash)
 {
-    SHA1_CTX ctx;
-    SHA1Init(&ctx);
+    uint32_t nid;
+    try {
+        nid = std::stol(value, nullptr);
+    }
+    catch(std::invalid_argument& e)
+    {
 
-    for (size_t i = 0; i < strlen(value); i++)
+      SHA1_CTX ctx;
+      SHA1Init(&ctx);
+
+      for (size_t i = 0; i < strlen(value); i++)
         SHA1Update(&ctx, (const uint8_t*)value + i, 1);
 
-    uint8_t sha1[20];
-    SHA1Final(sha1, &ctx);
+      uint8_t sha1[20];
+      SHA1Final(sha1, &ctx);
 
-    uint32_t nid = (sha1[3] << 24) | (sha1[2] << 16) | (sha1[1] << 8) | sha1[0];
+      nid = (sha1[0] << 24) | (sha1[1] << 16) | (sha1[2] << 8) | sha1[3];
+    }
 
     *hash = nid;
 
     if(hash_table.count(nid) == 0)
     {
-        uint32_t offset = hash_table_bin.size();
+        uint32_t offset = hash_table_bin.size() / 4;
 
         hash_table.emplace(nid, offset);
 
-        hash_table_bin.push_back(sha1[3]);
-        hash_table_bin.push_back(sha1[2]);
-        hash_table_bin.push_back(sha1[1]);
-        hash_table_bin.push_back(sha1[0]);
+        uint8_t* nid8 = reinterpret_cast<uint8_t*>(&nid);
+        hash_table_bin.push_back(nid8[0]);
+        hash_table_bin.push_back(nid8[1]);
+        hash_table_bin.push_back(nid8[2]);
+        hash_table_bin.push_back(nid8[3]);
 
         return offset;
     }

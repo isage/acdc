@@ -46,7 +46,7 @@ namespace cxml {
 
   std::string Decompiler::get_from_hashtable(int32_t handle)
   {
-      fseek(fp, header.hashtable_offset + handle, SEEK_SET);
+      fseek(fp, header.hashtable_offset + handle*4, SEEK_SET);
       std::string attr_name;
 
       uint32_t data;
@@ -149,9 +149,9 @@ namespace cxml {
 
       if (orig_size == 0)
       {
-            printf("Error: failed to decompress file %s!", name.c_str());
+            printf("Warning: failed to decompress file %s!", name.c_str());
             free(file);
-            exit(-1);
+            return;
       }
 
       if (compressed)
@@ -161,9 +161,9 @@ namespace cxml {
         int ret = uncompress(zout, (uLongf*)&zout_len, file, size);
         if (ret != Z_OK)
         {
-            printf("Error: failed to decompress file %s!", name.c_str());
+            printf("Warning: failed to decompress file %s!", name.c_str());
             free(file);
-            exit(-1);
+            return;
         }
         FILE* out = fopen(name.c_str(), "wb");
         fwrite(zout, zout_len, 1, out);
