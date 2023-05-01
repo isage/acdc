@@ -84,12 +84,12 @@ std::pair<uint32_t,uint32_t> Compiler::push_to_intarray_table(const char* value)
         if (offset % 4 == 0) break;
         start++;
     }
-    if (offset > 0)
+    if (offset >= 0)
     {
         return {offset / 4, values.size()};
     }
 
-    offset = intarray_table_size / 4;
+    offset = intarray_table_bin.size() / 4;
     for (auto& v : temp_binary)
     {
         intarray_table_bin.push_back(v);
@@ -118,12 +118,12 @@ std::pair<uint32_t,uint32_t> Compiler::push_to_floatarray_table(const char* valu
         if (offset % 4 == 0) break;
         start++;
     }
-    if (offset > 0)
+    if (offset >= 0)
     {
         return {offset / 4, values.size()};
     }
 
-    offset = floatarray_table_size / 4;
+    offset = floatarray_table_bin.size() / 4;
     for (auto& v : temp_binary)
     {
         floatarray_table_bin.push_back(v);
@@ -166,8 +166,8 @@ uint32_t Compiler::push_to_id_table(const char* value, uint32_t entity_offset )
         else
         {
             // error out
+            printf("Error: duplicate id %s\n", value);
             exit(-1);
-//            return -1;
         }
         return offset;
     }
@@ -258,6 +258,7 @@ uint32_t Compiler::push_to_idhash_table(const char* value, uint32_t entity_offse
         else
         {
             // error
+            printf("Error: duplicate idhash %s\n", value);
             exit(-1);
         }
         return offset;
@@ -535,7 +536,8 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
                 }
                 case cxml::Attr::Float:
                 {
-                    attr.offset = (uint32_t)el->FloatAttribute(v.name.c_str());
+                    float f = el->FloatAttribute(v.name.c_str());
+                    *(uint32_t*)&attr.offset = *(uint32_t*)&f;
                     attr.size = 0;
                     break;
                 }

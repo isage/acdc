@@ -35,10 +35,8 @@ class Compiler {
     std::map<std::string, std::pair<uint32_t, uint32_t>> wstring_table;
     std::vector<uint8_t> wstring_table_bin = {};
 
-    uint32_t intarray_table_size = 0;
     std::vector<uint8_t> intarray_table_bin = {};
 
-    uint32_t floatarray_table_size = 0;
     std::vector<uint8_t> floatarray_table_bin = {};
 
     std::map<std::string, uint32_t> id_table;
