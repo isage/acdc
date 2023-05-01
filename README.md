@@ -10,4 +10,4 @@ Another CXML (De)Compiler
 
 ## Credits
 * [PoS](https://github.com/Princess-of-Sleeping) for rco decompiler
-* [Graphene](https://github.com/GrapheneCt) for rcs/rco schema
+* [Graphene](https://github.com/GrapheneCt) for rcs/rco schema, testing
