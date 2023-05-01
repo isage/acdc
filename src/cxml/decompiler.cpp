@@ -149,7 +149,7 @@ namespace cxml {
 
       if (orig_size == 0)
       {
-            printf("Warning: failed to decompress file %s!", name.c_str());
+            printf("Warning: failed to decompress file %s!\n", name.c_str());
             free(file);
             return;
       }
@@ -161,7 +161,7 @@ namespace cxml {
         int ret = uncompress(zout, (uLongf*)&zout_len, file, size);
         if (ret != Z_OK)
         {
-            printf("Warning: failed to decompress file %s!", name.c_str());
+            printf("Warning: failed to decompress file %s!\n", name.c_str());
             free(file);
             return;
         }
