@@ -197,6 +197,17 @@ namespace cxml {
         else
             el = parent->InsertNewChildElement(node_name.c_str());
 
+        defElement* e;
+        if (_definition.count(node_name))
+        {
+            e = _definition.at(node_name);
+        }
+        else
+        {
+            e = new defElement();
+            _definition.emplace(node_name, e);
+        }
+
         bool is_file = false;
         uint32_t file_size = 0;
         uint32_t file_orig_size = 0;
@@ -211,6 +222,16 @@ namespace cxml {
 
             std::string val;
             std::string type;
+
+            if (!e->attributes.count(attr_name))
+            {
+                e->attributes.emplace(attr_name, (cxml::Attr)attr->type);
+            }
+            if(parent)
+            {
+                e->parents.insert(parent->Name());
+            }
+
             switch((cxml::Attr)attr->type)
             {
                 default: break;
@@ -356,6 +377,57 @@ namespace cxml {
     }
   }
 
+  void Decompiler::generate_cxmldef(std::string filename)
+  {
+    std::map<cxml::Attr, std::string> attr_types = {
+      {cxml::Attr::None, "none"},
+      {cxml::Attr::Int, "int"},
+      {cxml::Attr::Float, "float"},
+      {cxml::Attr::String, "string"},
+      {cxml::Attr::WString, "wstring"},
+      {cxml::Attr::Hash, "hash"},
+      {cxml::Attr::IntArray, "intarray"},
+      {cxml::Attr::FloatArray, "floatarray"},
+      {cxml::Attr::File, "file"},
+      {cxml::Attr::ID, "id"},
+      {cxml::Attr::IDRef, "idref"},
+      {cxml::Attr::IDHash, "idhash"},
+      {cxml::Attr::IDHashRef, "idhashref" }
+    };
+
+    tinyxml2::XMLDocument doc;
+    doc.InsertEndChild(doc.NewDeclaration());
+
+
+    tinyxml2::XMLElement* wrapper = doc.NewElement("cxml");
+    doc.InsertEndChild(wrapper);
+    char magic[5] = {0};
+    memcpy(magic, header.magic, 4);
+
+    char version[8] = {0};
+    snprintf(version, 7, "0x%04X", header.version);
+    memcpy(magic, header.magic, 4);
+    wrapper->SetAttribute("magic", magic);
+    wrapper->SetAttribute("version", version);
+
+    for(auto& child: _definition)
+    {
+        tinyxml2::XMLElement* child_element = wrapper->InsertNewChildElement(child.first.c_str());
+        child_element->SetAttribute("parents", join(child.second->parents, ", ").c_str());
+        std::vector<std::string> attributes;
+        for(auto& a: child.second->attributes)
+        {
+            std::string attr = a.first + std::string(":") + attr_types.at(a.second);
+            attributes.push_back(attr);
+        }
+        child_element->SetAttribute("attributes", join(attributes, ", ").c_str());
+    }
+
+    doc.SaveFile(filename.c_str());
+
+  }
+
+
   bool Decompiler::decompile(std::string out)
   {
     fs::path p = fs::absolute(out);
@@ -392,6 +464,7 @@ namespace cxml {
     doc.InsertEndChild(doc.NewDeclaration());
     parse_tree(0, nullptr, doc);
     doc.SaveFile(out.c_str());
+
 
     return true;
   }

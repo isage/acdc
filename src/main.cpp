@@ -26,6 +26,7 @@ int main(int argc, char* argv[])
       ("cxml", "Input xml file", cxxopts::value<std::string>())
       ("xml", "Output xml file", cxxopts::value<std::string>())
       ("rcd", "Input rcd file (optional)", cxxopts::value<std::string>())
+      ("cxmldef", "Output cxmldef file (optional)", cxxopts::value<std::string>())
   ;
 
   auto result = options.parse(argc, argv);
@@ -85,6 +86,10 @@ int main(int argc, char* argv[])
         return -1;
       }
 
+      if (result.count("cxmldef"))
+      {
+        decompiler.generate_cxmldef(result["cxmldef"].as<std::string>());
+      }
   }
 
   return 0;

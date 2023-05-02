@@ -11,13 +11,20 @@
 #include <cstdint>
 #include <iostream>
 #include <map>
+#include <set>
 
 namespace cxml {
+
+typedef struct {
+    std::set<std::string> parents;
+    std::map<std::string, cxml::Attr> attributes;
+} defElement;
 
 class Decompiler {
   public:
     Decompiler(std::string cxml, std::string rcd);
     bool decompile(std::string out);
+    void generate_cxmldef(std::string filename);
 
   private:
     FILE* fp;
@@ -32,6 +39,8 @@ class Decompiler {
     void extract_from_filetable(std::string filename, int32_t handle, int32_t size, bool compressed = false, uint32_t file_orig_size = 0);
 
     void parse_rcd();
+
+
     std::map<
         std::string,
         std::map<std::string,std::string>
@@ -50,6 +59,8 @@ class Decompiler {
     uint8_t* intarraytable;
     uint8_t* floatarraytable;
     uint8_t* filetable;
+
+    std::map<std::string, defElement*> _definition;
 };
 
 }

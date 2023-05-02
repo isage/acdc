@@ -8,6 +8,7 @@
 #include <locale>
 #include <algorithm>
 #include <vector>
+#include <set>
 #include <cstdint>
 #include <iterator>
 
@@ -55,6 +56,25 @@ static inline std::string join(const std::vector<std::string> &vec, const char* 
             return os.str();
     }
 }
+
+static inline std::string join(const std::set<std::string> &vec, const char* delim) {
+    switch (vec.size())
+    {
+        case 0:
+            return "";
+        case 1:
+            return *vec.begin();
+        default:
+            std::ostringstream os;
+            std::copy(vec.begin(), std::prev(vec.end()), std::ostream_iterator<std::string>(os, delim));
+            os << *vec.rbegin();
+            return os.str();
+    }
+}
+
+
+
+
 
 static inline void binarray_align(std::vector<uint8_t>& v, uint32_t align)
 {
