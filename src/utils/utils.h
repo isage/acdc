@@ -14,13 +14,13 @@
 
 static inline void ltrim(std::string &s) {
     s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
-        return !std::isspace(ch);
+        return !std::isspace(ch) && ch != 10 && ch != 13;
     }));
 }
 
 static inline void rtrim(std::string &s) {
     s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch) {
-        return !std::isspace(ch);
+        return !std::isspace(ch) && ch != 10 && ch != 13;
     }).base(), s.end());
 }
 
@@ -71,10 +71,6 @@ static inline std::string join(const std::set<std::string> &vec, const char* del
             return os.str();
     }
 }
-
-
-
-
 
 static inline void binarray_align(std::vector<uint8_t>& v, uint32_t align)
 {
