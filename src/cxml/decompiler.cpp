@@ -147,9 +147,12 @@ namespace cxml {
       uint8_t* file = (uint8_t*)malloc(size);
       fread(file, size, 1, fp);
 
-      if (orig_size == 0)
+      if (compressed && orig_size == 0)
       {
-            printf("Warning: failed to decompress file %s!\n", name.c_str());
+            printf("Warning: failed to decompress file (origsize=0) %s!\n", name.c_str());
+            FILE* out = fopen(name.c_str(), "wb");
+            fwrite(file, size, 1, out);
+            fclose(out);
             free(file);
             return;
       }
@@ -162,6 +165,9 @@ namespace cxml {
         if (ret != Z_OK)
         {
             printf("Warning: failed to decompress file %s!\n", name.c_str());
+            FILE* out = fopen(name.c_str(), "wb");
+            fwrite(file, size, 1, out);
+            fclose(out);
             free(file);
             return;
         }
@@ -357,6 +363,7 @@ namespace cxml {
         std::string line;
         while (std::getline(rcdf, line))
         {
+            trim(line);
             if(!line.empty() && line[0] != '#')
             {
                 std::vector<std::string> tokens = split(line, ' ');
