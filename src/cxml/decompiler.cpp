@@ -330,7 +330,6 @@ namespace cxml {
         {
            std::string val  = std::string(el->Attribute("id")) + std::string(".bin");
            // if we have filename from rcd - update it
-           printf("%s\n", file_attr_hash.c_str());
            if (!file_attr_hash.empty() && _rcd_table.count(file_attr_hash))
            {
              if (_rcd_table.at(file_attr_hash).count("src"))
