@@ -446,7 +446,7 @@ namespace cxml {
   bool Decompiler::decompile(std::string out)
   {
     fs::path p = fs::absolute(out);
-    _outdir = p.remove_filename();
+    _outdir = p.remove_filename().string();
     fs::create_directories(p.remove_filename());
 
     fp = fopen(_cxml.c_str(), "rb");

@@ -373,16 +373,24 @@ std::tuple<uint32_t,uint32_t,uint32_t> Compiler::push_to_file_table(const char* 
         exit(-1);
     }
 
-    if(file_table.count(p) == 0)
+    if(file_table.count(p.string()) == 0)
     {
         uint32_t filesize = 0;
         uint32_t compressed_size = 0;
         uint32_t offset = file_table_bin.size();
 
+#ifdef _WIN32
+        FILE* fp = _wfopen(p.c_str(), L"rb");
+#else
         FILE* fp = fopen(p.c_str(), "rb");
+#endif
         if (!fp)
         {
+#ifdef _WIN32
+            printf("Can't open %ls\n", p.c_str());
+#else
             printf("Can't open %s\n", p.c_str());
+#endif
             exit(-1);
         }
         fseek(fp, 0, SEEK_END);
@@ -405,7 +413,11 @@ std::tuple<uint32_t,uint32_t,uint32_t> Compiler::push_to_file_table(const char* 
 
             if (res != Z_OK)
             {
+#ifdef _WIN32
+                printf("Warning: can't compress %ls. Adding as-is\n", p.c_str());
+#else
                 printf("Warning: can't compress %s. Adding as-is\n", p.c_str());
+#endif
                 for(size_t i = 0; i < filesize;i++)
                 {
                     file_table_bin.push_back(buf[i]);
@@ -430,12 +442,12 @@ std::tuple<uint32_t,uint32_t,uint32_t> Compiler::push_to_file_table(const char* 
         }
 
         free(buf);
-        file_table.emplace(p, std::make_tuple(offset, compressed_size, filesize));
+        file_table.emplace(p.string(), std::make_tuple(offset, compressed_size, filesize));
         return {offset, compressed_size, filesize};
     }
     else
     {
-        std::tuple<uint32_t,uint32_t,uint32_t> ret = file_table.at(p);
+        std::tuple<uint32_t,uint32_t,uint32_t> ret = file_table.at(p.string());
         return ret;
     }
 }
@@ -536,8 +548,9 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
                 }
                 case cxml::Attr::Float:
                 {
-                    float f = el->FloatAttribute(v.name.c_str());
-                    *(uint32_t*)&attr.offset = *(uint32_t*)&f;
+                    union ftoi { uint32_t i; float f; } u;
+                    u.f = el->FloatAttribute(v.name.c_str());
+                    attr.offset = u.i;
                     attr.size = 0;
                     break;
                 }
@@ -931,7 +944,7 @@ void Compiler::generateCHeader(std::string cxml, std::string header)
   // header generation
 
   fs::path p = header;
-  std::string stem = p.filename();
+  std::string stem = p.filename().string();
   std::transform(stem.begin(), stem.end(), stem.begin(), ::toupper);
   std::replace( stem.begin(), stem.end(), '.', '_');
 

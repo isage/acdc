@@ -29,6 +29,10 @@ else()
   add_definitions("-Wall")
 endif()
 
+if(MINGW)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static")
+endif()
+
 add_executable(acdc ${SOURCES})
 set_target_properties(acdc PROPERTIES
         CXX_STANDARD 17
