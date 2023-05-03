@@ -65,7 +65,7 @@ namespace cxml {
       return attr_name;
   }
 
-  std::string Decompiler::get_from_idhashtable(int32_t handle)
+  std::string Decompiler::get_from_idhashtable(int32_t handle, bool demangle)
   {
       fseek(fp, header.idhashtable_offset + handle + 4, SEEK_SET);
       std::string attr_name;
@@ -77,13 +77,15 @@ namespace cxml {
 
       //if we have .rcd - search for corresponding id
       sprintf(cdata, "%08x", data);
-      if (_rcd_table.count(cdata))
+      if (_rcd_table.count(cdata) && demangle)
       {
         attr_name = _rcd_table.at(cdata).at("id");
         return attr_name;
       }
-
-      sprintf(cdata, "0x%08x", data);
+      if (!demangle)
+          sprintf(cdata, "%08x", data);
+      else
+          sprintf(cdata, "0x%08x", data);
       attr_name = cdata;
       return attr_name;
   }
@@ -219,6 +221,7 @@ namespace cxml {
         uint32_t file_orig_size = 0;
         uint32_t file_offset = 0;
         std::string file_attr_name;
+        std::string file_attr_hash;
         bool file_compress = false;
 
         for(int i = 0; i < theader->num_attributes; i++)
@@ -308,6 +311,7 @@ namespace cxml {
                 case cxml::Attr::IDHash:
                 {
                     val = get_from_idhashtable(attr->offset);
+                    file_attr_hash = get_from_idhashtable(attr->offset, false);
                     break;
                 }
                 case cxml::Attr::IDHashRef:
@@ -324,15 +328,17 @@ namespace cxml {
         // check if we have file and unpack if needed
         if(is_file)
         {
-           std::string val = std::string(el->Attribute("id")) + std::string(".bin");
-           // todo: if we have filename from rcd - update it
-           if (_rcd_table.count(el->Attribute("id")))
+           std::string val  = std::string(el->Attribute("id")) + std::string(".bin");
+           // if we have filename from rcd - update it
+           printf("%s\n", file_attr_hash.c_str());
+           if (!file_attr_hash.empty() && _rcd_table.count(file_attr_hash))
            {
-             if (_rcd_table.at(el->Attribute("id")).count("src"))
+             if (_rcd_table.at(file_attr_hash).count("src"))
              {
-                val = _rcd_table.at(el->Attribute("id")).at("src");
+                val = _rcd_table.at(file_attr_hash).at("src");
              }
            }
+
            extract_from_filetable(_outdir + val, file_offset, file_size, file_compress, file_orig_size);
            // update attr
            el->SetAttribute(file_attr_name.c_str(), val.c_str());

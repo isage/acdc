@@ -4,7 +4,7 @@ include(CheckCXXCompilerFlag)
 project(acdc)
 
 set(acdc_VERSION_MAJOR 1)
-set(acdc_VERSION_MINOR 1)
+set(acdc_VERSION_MINOR 2)
 set(acdc_VERSION_PATCH 1)
 set(acdc_VERSION_RELEASE 1)
 

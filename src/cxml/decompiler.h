@@ -32,7 +32,7 @@ class Decompiler {
     std::string get_from_stringtable(int32_t handle);
     std::string get_from_wstringtable(int32_t handle, int32_t size);
     std::string get_from_hashtable(int32_t handle);
-    std::string get_from_idhashtable(int32_t handle);
+    std::string get_from_idhashtable(int32_t handle, bool demangle = true);
     std::string get_from_intarraytable(int32_t handle, int32_t size);
     std::string get_from_floatarraytable(int32_t handle, int32_t size);
     std::string get_from_idtable(int32_t handle);
