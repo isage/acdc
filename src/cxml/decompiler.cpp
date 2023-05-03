@@ -53,9 +53,9 @@ namespace cxml {
       fread(&data, 4, 1, fp);
       char cdata[16];
 
+      sprintf(cdata, "%08x", data);
       if (_rcd_table.count(cdata))
       {
-        sprintf(cdata, "%08x", data);
         attr_name = _rcd_table.at(cdata).at("id");
         return attr_name;
       }
@@ -76,9 +76,9 @@ namespace cxml {
       char cdata[16];
 
       //if we have .rcd - search for corresponding id
+      sprintf(cdata, "%08x", data);
       if (_rcd_table.count(cdata))
       {
-        sprintf(cdata, "%08x", data);
         attr_name = _rcd_table.at(cdata).at("id");
         return attr_name;
       }
