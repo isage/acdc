@@ -128,4 +128,13 @@ static inline std::string float_to_string(float val)
     return str;
 }
 
+static inline std::vector<std::pair<uint32_t, std::string>>::iterator find_rcd_element(std::vector<std::pair<uint32_t, std::string>>& vec, uint32_t key)
+{
+    for(auto it = vec.begin();it != vec.end(); it++)
+    {
+        if (key == (*it).first) return it;
+    }
+    return vec.end();
+}
+
 #endif

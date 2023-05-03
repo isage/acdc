@@ -303,6 +303,7 @@ uint32_t Compiler::push_to_idhashref_table(const char* value, uint32_t entity_of
         idhash_table_bin.push_back(nid8[2]);
         idhash_table_bin.push_back(nid8[3]);
 
+        hash_table_origin.emplace(value, true);
         return offset;
     }
     else
@@ -347,6 +348,7 @@ uint32_t Compiler::push_to_hash_table(const char* value, uint32_t* hash)
         hash_table_bin.push_back(nid8[2]);
         hash_table_bin.push_back(nid8[3]);
 
+        hash_table_origin.emplace(value, true);
         return offset;
     }
     else
@@ -354,8 +356,7 @@ uint32_t Compiler::push_to_hash_table(const char* value, uint32_t* hash)
         // warning
         if (!hash_table_origin.count(value))
             printf("Warning: %s has duplicate hash 0x%08x\n", value, nid);
-        else
-            hash_table_origin.emplace(value, true);
+        hash_table_origin.emplace(value, true);
         return hash_table.at(nid);
     }
 }
@@ -515,6 +516,7 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
     tree_table_size += sizeof(cxml::TreeHeader);
 
     bool is_file = false;
+    uint32_t idhash = 0;
     uint32_t hash = 0;
     std::string key;
     std::string id;
@@ -571,6 +573,14 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
                 {
                     attr.offset = push_to_hash_table(el->Attribute(v.name.c_str()), &hash);
                     attr.size = 4;
+
+                    char h[16];
+                    sprintf(h, "%08x(1)", hash);
+                    key = el->Attribute(v.name.c_str());
+                    auto it = find_rcd_element(rcd_table, hash);
+                    if (it == rcd_table.end())
+                        rcd_table.push_back(std::pair{hash, std::string("key:") + std::string(h) + std::string(" id:")+key});
+
                     break;
                 }
                 case cxml::Attr::IntArray:
@@ -636,16 +646,23 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
                 }
                 case cxml::Attr::IDHash:
                 {
-                    attr.offset = push_to_idhash_table(el->Attribute(v.name.c_str()), tag->offset, &hash);
+                    attr.offset = push_to_idhash_table(el->Attribute(v.name.c_str()), tag->offset, &idhash);
                     attr.size = 0;
                     key = el->Attribute(v.name.c_str());
+
+                    char h[16];
+                    sprintf(h, "%08x(0)", idhash);
+
+                    auto it = find_rcd_element(rcd_table, idhash);
+                    if (it == rcd_table.end())
+                        rcd_table.push_back(std::pair{idhash, std::string("key:") + std::string(h) + std::string(" id:")+key});
+
                     break;
                 }
                 case cxml::Attr::IDHashRef:
                 {
                     attr.offset = push_to_idhashref_table(el->Attribute(v.name.c_str()), tag->offset);
                     attr.size = 0;
-                    key = el->Attribute(v.name.c_str());
                     break;
                 }
             }
@@ -655,38 +672,35 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
         }
     }
 
-    if (hash != 0)
+    if (idhash != 0)
     {
         char h[16];
-        sprintf(h, "%08x(0)", hash);
+
+        sprintf(h, "%08x(0)", idhash);
+
         if (is_file && el->Attribute("src") && el->Attribute("type"))
         {
-            rcd_table.push_back(
-                std::string("key:") + std::string(h)
+            // todo: check for existance and assign pos
+            auto it = find_rcd_element(rcd_table, idhash);
+            if (it != rcd_table.end())
+              (*it).second = std::string("key:") + std::string(h)
                 + std::string(" id:") + key
                 + std::string(",src:") + std::string(el->Attribute("src"))
-                + std::string(",type:") + std::string(el->Attribute("type"))
-            );
-        }
-        else
-        {
-            rcd_table.push_back(std::string("key:") + std::string(h) + std::string(" id:")+key);
+                + std::string(",type:") + std::string(el->Attribute("type"));
+
         }
     }
     else if (!id.empty())
     {
         if (is_file && el->Attribute("src") && el->Attribute("type"))
         {
-            rcd_table.push_back(
-                std::string("key:") + id
-                + std::string(" id:") + key
-                + std::string(",src:") + std::string(el->Attribute("src"))
-                + std::string(",type:") + std::string(el->Attribute("type"))
-            );
-        }
-        else
-        {
-            rcd_table.push_back(std::string("key:") + id + std::string(" id:")+key);
+            // TODO? makes rcd incompatible
+//            rcd_table.push_back(idhash,
+//                std::string("key:") + id
+//                + std::string(" id:") + key
+//                + std::string(",src:") + std::string(el->Attribute("src"))
+//                + std::string(",type:") + std::string(el->Attribute("type"))
+//            );
         }
     }
 
@@ -929,11 +943,11 @@ void Compiler::generateRcd(std::string cxml, std::string rcd)
 {
   // rcd generation
   FILE*fp = fopen(rcd.c_str(), "wb");
-  fprintf(fp, "# generated by acdc from %s\n\n", cxml.c_str());
+  fprintf(fp, "# generated by acdc from %s\r\n\r\n", cxml.c_str());
 
   for (auto&v : rcd_table)
   {
-    fprintf(fp, "%s\n", v.c_str());
+    fprintf(fp, "%s\r\n", v.second.c_str());
   }
 
   fclose(fp);

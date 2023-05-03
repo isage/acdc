@@ -56,7 +56,7 @@ class Compiler {
     uint32_t tree_table_size  = 0;
     std::vector<uint8_t> tree_table_bin = {};
 
-    std::vector<std::string> rcd_table = {};
+    std::vector<std::pair<uint32_t, std::string>> rcd_table = {};
 
     uint32_t push_to_string_table(const char* value);
     uint32_t push_to_string_table(std::string value); // todo: remove?

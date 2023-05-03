@@ -216,6 +216,11 @@ namespace cxml {
             _definition.emplace(node_name, e);
         }
 
+        if(parent)
+        {
+            e->parents.insert(parent->Name());
+        }
+
         bool is_file = false;
         uint32_t file_size = 0;
         uint32_t file_orig_size = 0;
@@ -235,10 +240,6 @@ namespace cxml {
             if (!e->attributes.count(attr_name))
             {
                 e->attributes.emplace(attr_name, (cxml::Attr)attr->type);
-            }
-            if(parent)
-            {
-                e->parents.insert(parent->Name());
             }
 
             switch((cxml::Attr)attr->type)
@@ -424,7 +425,8 @@ namespace cxml {
 
     for(auto& child: _definition)
     {
-        tinyxml2::XMLElement* child_element = wrapper->InsertNewChildElement(child.first.c_str());
+        tinyxml2::XMLElement* child_element = wrapper->InsertNewChildElement("element");
+        child_element->SetAttribute("name", child.first.c_str());
         if(child.second->parents.size() > 0)
             child_element->SetAttribute("parents", join(child.second->parents, ", ").c_str());
         std::vector<std::string> attributes;
