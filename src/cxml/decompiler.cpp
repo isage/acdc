@@ -420,14 +420,16 @@ namespace cxml {
     for(auto& child: _definition)
     {
         tinyxml2::XMLElement* child_element = wrapper->InsertNewChildElement(child.first.c_str());
-        child_element->SetAttribute("parents", join(child.second->parents, ", ").c_str());
+        if(child.second->parents.size() > 0)
+            child_element->SetAttribute("parents", join(child.second->parents, ", ").c_str());
         std::vector<std::string> attributes;
         for(auto& a: child.second->attributes)
         {
             std::string attr = a.first + std::string(":") + attr_types.at(a.second);
             attributes.push_back(attr);
         }
-        child_element->SetAttribute("attributes", join(attributes, ", ").c_str());
+        if(attributes.size() > 0)
+            child_element->SetAttribute("attributes", join(attributes, ", ").c_str());
     }
 
     doc.SaveFile(filename.c_str());
