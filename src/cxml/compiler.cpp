@@ -602,7 +602,8 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
                     is_file = true;
                     // if element has attr compress = on: add origsize field and compress
                     const tinyxml2::XMLAttribute *compress = el->FindAttribute("compress");
-                    if(compress && strcmp(compress->Value(), "on") == 0)
+                    const tinyxml2::XMLAttribute *origsize = el->FindAttribute("origsize");
+                    if(compress && strcmp(compress->Value(), "on") == 0 && !origsize)
                     {
                         // offset, size, origsize
                         std::tuple<uint32_t, uint32_t, uint32_t> oscs = push_to_file_table(el->Attribute(v.name.c_str()), true);
