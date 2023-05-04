@@ -59,9 +59,9 @@ int main(int argc, char* argv[])
           compiler.generateRcd(in, result["output_rcd"].as<std::string>());
       }
 
-      if (result.count("output_header"))
+      if (result.count("output_cheader"))
       {
-          compiler.generateCHeader(in, result["output_header"].as<std::string>());
+          compiler.generateCHeader(in, result["output_cheader"].as<std::string>());
       }
   }
   else if (result.count("decompile"))
