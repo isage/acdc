@@ -45,6 +45,8 @@ class Compiler {
     std::map<uint32_t, std::pair<uint32_t, std::string>> idhash_table;
     std::vector<uint8_t> idhash_table_bin = {};
 
+    std::map<uint32_t, std::pair<uint32_t, std::string>> header_table;
+
     std::map<uint32_t, uint32_t> hash_table;
     std::vector<uint8_t> hash_table_bin = {};
     std::map<std::string, bool> hash_table_origin;
