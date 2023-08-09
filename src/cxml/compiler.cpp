@@ -133,7 +133,6 @@ std::pair<uint32_t,uint32_t> Compiler::push_to_floatarray_table(const char* valu
 
 uint32_t Compiler::push_to_id_table(const char* value, uint32_t entity_offset )
 {
-    // printf("id: %s\n", value);
     if(id_table.count(value) == 0)
     {
         uint32_t offset = id_table_bin.size();
@@ -176,7 +175,6 @@ uint32_t Compiler::push_to_id_table(const char* value, uint32_t entity_offset )
 
 uint32_t Compiler::push_to_idref_table(const char* value, uint32_t entity_offset )
 {
-    printf("idref: %s\n", value);
     if(id_table.count(value) == 0)
     {
         uint32_t offset = id_table_bin.size();
@@ -207,7 +205,6 @@ uint32_t Compiler::push_to_idref_table(const char* value, uint32_t entity_offset
 
 uint32_t Compiler::push_to_idhash_table(const char* value, uint32_t entity_offset, uint32_t* hash)
 {
-    // printf("idhash: %s\n", value);
     // if it's hex value, treat as nid
     uint32_t nid;
     try {
@@ -271,7 +268,6 @@ uint32_t Compiler::push_to_idhash_table(const char* value, uint32_t entity_offse
 
 uint32_t Compiler::push_to_idhashref_table(const char* value, uint32_t entity_offset)
 {
-    // printf("idhashref: %s\n", value);
     // if it's hex value, treat as nid
     uint32_t nid;
     try {
@@ -320,7 +316,6 @@ uint32_t Compiler::push_to_idhashref_table(const char* value, uint32_t entity_of
 
 uint32_t Compiler::push_to_hash_table(const char* value, uint32_t* hash)
 {
-    // printf("hash: %s\n", value);
     uint32_t nid;
     try {
         nid = std::stol(value, nullptr);
