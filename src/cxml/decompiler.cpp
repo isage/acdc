@@ -329,7 +329,16 @@ namespace cxml {
         // check if we have file and unpack if needed
         if(is_file)
         {
-           std::string val  = std::string(el->Attribute("id")) + std::string(".bin");
+           std::string val;
+           if (el->Attribute("id"))
+           {
+               val  = std::string(el->Attribute("id")) + std::string(".bin");
+           }
+           else // most probably override_texture
+           {
+               val  = std::string(parent->Attribute("id")) + std::string("_model_") + std::string(el->Attribute("model_type")) + std::string("_override.bin");
+           }
+
            // if we have filename from rcd - update it
            if (!file_attr_hash.empty() && _rcd_table.count(file_attr_hash))
            {
