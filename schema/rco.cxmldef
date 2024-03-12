@@ -1,149 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 <cxml version="0x0110" magic="RCOF">
-    <element name="resource" attributes="version:float, type:string, id:idhash" />
-    <element name="template_ref" parents="box, list_view, scroll_view, page, list_item, composite_drawer, plane, group, template, plane_button, button" attributes="id:hash, template:idhashref" />
-    <element name="pagetable" parents="resource" />
-    <element name="page" parents="pagetable" attributes="id:idhash, origin:intarray, style:idhashref, template:idhashref, layouter:string" />
-    <element name="group" parents="pagetable, template, group, page, plane, list_item, box, scroll_view, rich_text, plane_shadow, plane_button" attributes="id:hash" />
-    <element name="plane" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, dialog, box, button, group, image_button, radio_box, drop_shadow_button, color_shift_button, sliding_drawer, progressbar_touch, plane_button, text_box, slidebar, pagetable, plane_shadow, list_edge, app_icon_simple, check_box, composite_button" attributes="style:idhashref, id:hash, texture:idhashref, hit_ignore:int" />
-    <element name="pageturn" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, dialog, box, button, group, image_button, radio_box" attributes="style:idhashref, id:hash, texture:idhashref" />
-    <element name="speech_balloon" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, dialog, box, button, group, image_button" attributes="style:idhashref, id:hash, texture:idhashref" />
-    <element name="app_icon_simple" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, dialog, box, button, group, image_button" attributes="style:idhashref, id:hash, texture:idhashref, appearance:int, enable_tap:int" />
-    <element name="dialog" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, group" attributes="style:idhashref, exclusive_list:string, id:hash" />
-    <element name="composite_drawer" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, group, box, button_base" attributes="style:idhashref, id:hash" />
-    <element name="layout_hint" parents="pageturn, speech_balloon, plane, button, plane_button, radio_button, text, rich_text, check_box, list_item, progressbar_touch, busyindicator, scroll_view, list_view, text_box, scrollbar, scrollbar_touch, file_list, composite_drawer, image_button, composite_button, corner_button, webview, app_icon_simple, group, color_change_button, drop_shadow_button, box, color_shift_button, progressbar, radio_box, five_star_plane, browser_rich_text, thumbnail_button, image_slidebar, sliding_drawer, update_button, directbar, template, slidebar, page, plane_shadow, num_spin, list_edge, style_plane, button_base" attributes="origin:intarray, adjust:intarray, id:hash, anchor:intarray, color:floatarray, alpha:float, align:intarray, rot:floatarray, pos:floatarray, size:floatarray" />
-    <element name="resolution" parents="layout_hint, layout_box" attributes="origin:intarray, adjust:intarray, id:hash, anchor:intarray, color:floatarray, alpha:float, align:intarray, rot:floatarray, pos:floatarray, size:floatarray" />
-    <element name="layout_dialog" parents="dialog" attributes="min_size:floatarray, align:intarray, adjust:intarray, id:hash, anchor:intarray, children_adjust_y:int, children_adjust_x:int, layout_type:int, pos:floatarray, size:floatarray" />
-    <element name="focus_hint" parents="plane, button, plane_button, corner_button, radio_button, text, rich_text, check_box, list_item, busyindicator, scroll_view, list_view, text_box, image_button, composite_button, color_change_button, drop_shadow_button, color_shift_button, update_button, num_spin, group, app_icon_simple, file_list, box, button_base" attributes="direct_key:int, focus_offset:floatarray, focus_rot:floatarray, right_id:hash, down_id:hash, focus_shape:int, left_id:hash, up_id:hash, focus_size:floatarray, enable:int, focus_texture:idhashref" />
-    <element name="list_item" parents="template, list_view, box, group, list_item" attributes="style:idhashref, id:hash, text_auto_scroll_target:hash" />
-    <element name="scroll_view" parents="page, group, plane, template, box, list_item, plane_shadow" attributes="sbar_fadeout_time:float, style:idhashref, default_dir:int, w_sbar_h:hash, edit_auto_transition_mode:int, w_sbar_v:hash, snap_power:float, auto_snap:int, snap_anim_time:float, id:hash" />
-    <element name="file_list" parents="page, composite_drawer, group, plane, template, box" attributes="style:idhashref, id:hash" />
-    <element name="list_view" parents="page, box, plane, group, template, plane_shadow" attributes="cell_size_initial_default:floatarray, w_sbar_v:hash, style:idhashref, id:hash, sbar_fadeout_time:float, sound:idhashref, w_sbar_h:hash" />
-    <element name="scrollbar_touch" parents="page, box, list_view, group, text_box, rich_text, scroll_view" attributes="style:idhashref, id:hash, sound:idhashref, scroll_type:int" />
-    <element name="button" parents="list_item, page, template, scroll_view, list_view, box, plane, group, button, rich_text, text_box, text, image_button, pagetable, composite_drawer, plane_shadow, speech_balloon" attributes="sound:idhashref, list_view:idhashref, style:idhashref, enable:int, enable_long_press_text_auto_scroll:int, scroll_view:idhashref, id:hash, texture:idhashref, label:idhashref" />
-    <element name="composite_button" parents="list_item, page, template, scroll_view, list_view, box, plane, group" attributes="sound:idhashref, style:idhashref, scroll_view:idhashref, label:idhashref, list_view:idhashref, enable_long_press_text_auto_scroll:int, id:hash, str1:idhashref, tex0:idhashref" />
-    <element name="plane_button" parents="plane, list_item, page, template, scroll_view, list_view, box, group, progressbar_touch, text_box, app_icon_simple, composite_button, composite_drawer, text" attributes="sound:idhashref, style:idhashref, scroll_view:idhashref, label:idhashref, list_view:idhashref, enable_long_press_text_auto_scroll:int, id:hash, texture:idhashref, enable:int" />
-    <element name="image_button" parents="list_item, page, template, scroll_view, list_view, box, plane, group" attributes="sound:idhashref, list_view:idhashref, style:idhashref, enable_long_press_text_auto_scroll:int, scroll_view:idhashref, id:hash, texture:idhashref, label:idhashref, enable:int" />
-    <element name="radio_button" parents="list_item, page, group, box, radio_box, template" attributes="style:idhashref, id:hash, label:idhashref, tuck:int" />
-    <element name="text" parents="button, box, page, text, rich_text, plane, dialog, scroll_view, template, progressbar_touch, image_button, group, drop_shadow_button, list_item, color_shift_button, progressbar, plane_button, text_box, list_view, radio_button, plane_shadow, slidebar, pagetable, check_box" attributes="style:idhashref, auto_scroll:int, scroll_view:hash, id:hash, label:idhashref, selection_mode:int, long_press_text_auto_scroll_mode:int, texture:idhashref, auto_link_detect:int, url_scheme:int, label_alias:idhashref, disable_auto_scroll:int, auto_scroll_target_friend:hash" />
-    <element name="rich_text" parents="button, box, page, text, rich_text, plane, dialog, scroll_view, template, group" attributes="style:idhashref, auto_scroll:int, scroll_view:idhashref, w_sbar_v:hash, label:idhashref, id:hash, selection_mode:int" />
-    <element name="busyindicator" parents="page, plane, group, list_item, text, list_view, template, box, scroll_view, rich_text, button" attributes="style:idhashref, id:hash, texture:idhashref" />
-    <element name="scrollbar" parents="rich_text, page, plane, list_view, box, group, browser_rich_text, scroll_view, template" attributes="style:idhashref, scroll_type:int, id:hash" />
-    <element name="corner_button" parents="page, plane, template, group, pagetable" attributes="style:idhashref, id:hash" />
-    <element name="box" parents="speech_balloon, template, plane, dialog, box, scroll_view, list_view, group, rich_text, button, list_item, radio_box, radio_button, page, composite_drawer, plane_button, image_button" attributes="scroll_view:idhashref, style:idhashref, exclusive_list:string, id:hash, hit_ignore:int, texture:idhashref" />
-    <element name="radio_box" parents="speech_balloon, template, plane, dialog, box, scroll_view, list_view, group, text, page" attributes="id:hash" />
-    <element name="text_box" parents="template, plane, page, scroll_view, list_view, text, rich_text, box, group, plane_shadow, list_item, plane_button" attributes="ime_languages_forced:int, style:idhashref, auto_scroll:int, scroll_view:hash, ime_type:int, label:idhashref, list_view:idhashref, edit_mode:int, selection_mode:int, edit_auto_transition_mode:int, max_length:int, ime_supported_languages:int, ime_option:int, placeholder:idhashref, id:hash, password_mode:int, paste_mode:int, sound:idhashref, texture:idhashref, v_scrollbar:hash" />
-    <element name="progressbar_touch" parents="template, plane, page, scroll_view, list_view, text, rich_text, group" attributes="list_view:idhashref, style:idhashref, label_pos_mode:int, label_margin:float, scroll_view:idhashref, w_label:hash, id:hash, label_mode:int, label:idhashref, bar_mode:int" />
-    <element name="layout_box" parents="box, radio_box" attributes="origin:intarray, bottom_margin:float, children_adjust_y:int, children_adjust_x:int, top_margin:float, pos:floatarray, left_margin:float, id:hash, size:floatarray, boundary_mode_x:int, space:float, right_margin:float, children_width:float, children_height:float, align:intarray, boundary_mode_y:int, space_adjust:int, adjust:intarray, layout_type:int, anchor:intarray, children_align_x:int, children_align_y:int, min_size:floatarray, max_size:floatarray, alpha:float" />
-    <element name="check_box" parents="box, page, list_view, text, rich_text, group, button, plane, list_item, template, text_box, image_button" attributes="style:idhashref, id:hash, sound:idhashref" />
-    <element name="webview" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, dialog, box, button, group" attributes="style:idhashref, id:hash, texture:idhashref" />
-    <element name="styletable" parents="resource" />
-    <element name="style_plane" parents="styletable" attributes="color:floatarray, planeobj:hash, id:idhash" />
-    <element name="style_list_item" parents="styletable" attributes="sound:idhashref, textobj:hash, color:floatarray, planeobj:hash, bg_obj:hash, id:idhash" />
-    <element name="style_pageturn" parents="styletable" attributes="color:floatarray, label_obj:hash, sound:idhashref, id:idhash, turn_obj:hash" />
-    <element name="style_scroll_view" parents="styletable" attributes="sound:idhashref, max_view_size:floatarray, id:idhash, auto_snap:int, color:floatarray, auto_bound:int, manual_view_box:floatarray, min_view_size:floatarray, sbar_v_margin:floatarray, bg_obj:hash" />
-    <element name="style_list_view" parents="styletable" attributes="sound:idhashref, color:floatarray, bg_obj:hash, cell_size_initial_default:floatarray, id:idhash, sbar_v_margin:floatarray" />
-    <element name="style_box" parents="styletable" attributes="color:floatarray, id:idhash, planeobj:hash" />
-    <element name="planeobj" parents="style_pageturn, style_list_view, style_plane, style_text, style_rich_text, style_text_box, style_list_item, style_button, style_plane_button, style_corner_button, style_image_button, style_composite_drawer, style_composite_button, style_progressbar_touch, style_radio_button, style_drop_shadow_plane, style_drop_shadow_button, style_color_change_button, style_scrollbar, style_scrollbar_touch, style_box, style_speech_balloon, style_image_slidebar, style_scroll_view, style_banner_button, style_browser_rich_text, style_five_star_plane, style_thumbnail_button, style_file_list, style_progressbar, style_update_button, style_directbar, style_slidebar, style_check_box, style_plane_shadow, style_scrollbar2d, style_webview, style_mapview" attributes="texture0:idhashref, scale_mode_y:int, scale_mode_x:int, pos:floatarray, tex_region:floatarray, reduce_transparency:int, id:hash, color:floatarray, size:floatarray, align_y:int, align_x:int, blend:int, scale_value:floatarray, texture1:idhashref" />
-    <element name="style_text" parents="styletable" attributes="color:floatarray, textobj:hash, adjust_min_size:floatarray, planeobj:hash, id:idhash, bottom_margin:float, right_margin:float, top_margin:float, left_margin:float, sound:idhashref" />
-    <element name="style_rich_text" parents="styletable" attributes="id:idhash, color:floatarray, textobj:hash, planeobj:hash, bg_obj:hash" />
-    <element name="style_composite_drawer" parents="styletable" attributes="textobj:hash, planeobj:hash, id:idhash" />
-    <element name="style_busyindicator" parents="styletable" attributes="color:floatarray, ball_color:floatarray, ball_size:float, id:idhash" />
-    <element name="textobj" parents="style_pageturn, style_text, style_rich_text, style_button, style_plane_button, style_text_box, style_image_button, style_composite_drawer, style_composite_button, style_radio_button, style_directbar" attributes="shadow_color:floatarray, family:int, align_y:int, align_x:int, underline_color:floatarray, max_line_count:int, enlarge_line_pitch:int, word_wrap:int, emboss:int, id:hash, size:floatarray, strike_color:floatarray, back_color:floatarray, text_align:int, adjust_x:int, adjust_y:int, ellipsis:int, text_shadow:int, line_space:float, bold:int, pos:floatarray, line_pitch:float, shadow:int, color:floatarray, font_size:float, font_color:floatarray, visible_size:floatarray, oblique:int, kinsoku:int, visible_pos:floatarray, underline:int, strike:int, mask:int, condense_x:int, enlarge_font_size:int, force_bold:int, deepen_color:int" />
-    <element name="style_text_box" parents="styletable" attributes="bottom_margin:float, right_margin:float, color:floatarray, top_margin:float, planeobj:hash, left_margin:float, textobj:hash, id:idhash, sound:idhashref, glowobj:hash, glow_max:int" />
-    <element name="style_progressbar_touch" parents="styletable" attributes="slider_glow_obj:hash, bar_fore_obj:hash, shadow_offset:floatarray, id:idhash, base_obj:hash, slider_obj:hash, glow_obj:hash, bar_shadow_obj:hash, signal_obj:hash, bar_back_obj:hash, shadow_margin:floatarray, base_shadow_obj:hash" />
-    <element name="style_corner_button" parents="styletable" attributes="sound:idhashref, key_focus:int, bottom_margin:float, glow_obj:hash, right_margin:float, color:floatarray, highlight_obj:hash, top_margin:float, planeobj:hash, left_margin:float, focus_in_group:int, label_obj:hash, direct_key:int, bg_obj:hash, adjust_min_size:floatarray, id:idhash, layout_type:int, corner_obj:hash" />
-    <element name="style_button" parents="styletable" attributes="sound:idhashref, key_focus:int, bottom_margin:float, glow_obj:hash, right_margin:float, color:floatarray, highlight_obj:hash, top_margin:float, planeobj:hash, left_margin:float, focus_in_group:int, label_obj:hash, direct_key:int, bg_obj:hash, adjust_min_size:floatarray, id:idhash, adjust_max_size:floatarray, style_type:int" />
-    <element name="style_plane_button" parents="styletable" attributes="sound:idhashref, base_obj:hash, bottom_margin:float, glow_obj:hash, right_margin:float, color:floatarray, id:idhash, top_margin:float, planeobj:hash, left_margin:float, focus_in_group:int, label_obj:hash, direct_key:int, adjust_min_size:floatarray, image_obj:hash, key_focus:int" />
-    <element name="style_composite_button" parents="styletable" attributes="bottom_margin:float, right_margin:float, color:floatarray, glow_obj_id:int, top_margin:float, planeobj:hash, left_margin:float, bg_obj:hash, adjust_min_size:floatarray, id:idhash, sound:idhashref, glow_obj:hash, label_obj:hash" />
-    <element name="style_image_button" parents="styletable" attributes="style_type:int, sound:idhashref, bottom_margin:float, layout_type_x:int, glow_obj:hash, right_margin:float, color:floatarray, image_back_obj:hash, top_margin:float, planeobj:hash, left_margin:float, layout_type_y:int, label_obj:hash, direct_key:int, bg_obj:hash, adjust_min_size:floatarray, image_obj:hash, image_margin:float, id:idhash, focus_in_group:int, highlight_obj:hash, key_focus:int" />
-    <element name="style_radio_button" parents="styletable" attributes="style_type:int, sound:idhashref, bottom_margin:float, layout_type_x:int, glow_obj:hash, right_margin:float, color:floatarray, image_back_obj:hash, top_margin:float, planeobj:hash, left_margin:float, layout_type_y:int, label_obj:hash, direct_key:int, bg_obj:hash, adjust_min_size:floatarray, image_obj:hash, image_margin:float, id:idhash, focus_in_group:int, frame_num:int" />
-    <element name="style_web_view" parents="styletable" attributes="url_field:idhashref, reload_btn:idhashref, id:idhash, back_btn:idhashref, home_url:string, title_field:idhashref, forward_btn:idhashref, progressbar:idhashref" />
-    <element name="templatetable" parents="resource" />
-    <element name="template" parents="templatetable" attributes="fast_open:int, id:idhash" />
-    <element name="stringtable" parents="resource" />
-    <element name="locale" parents="stringtable" attributes="origsize:int, src:file, compress:string, id:id" />
-    <element name="texturetable" parents="resource" />
-    <element name="filetable" parents="resource" />
-    <element name="file" parents="filetable" attributes="origsize:int, src:file, compress:string, id:idhash, type:string" />
-    <element name="texture" parents="texturetable" attributes="src:file, margin_h:intarray, ignore_make_surface_first:string, origsize:int, type:string, id:idhash, div_ratio_h:floatarray, compress:string, margin_v:intarray, div_mode:string, div_ratio_v:floatarray, div_ratio_stretch:floatarray" />
-    <element name="soundindextable" parents="resource" />
-    <element name="sound_button" parents="soundindextable" attributes="id:idhash, decide:idhashref, press:idhashref, move_out:idhashref, long_press:idhashref" />
-    <element name="alias" parents="aliastable" attributes="org_id:idhashref, id:idhash" />
-    <element name="aliastable" parents="resource" />
-    <element name="banner_button" parents="list_item" attributes="style:idhashref, id:hash" />
-    <element name="browser_rich_text" parents="group, box" attributes="style:idhashref, id:hash, w_sbar_v:hash" />
-    <element name="button_base" parents="template" attributes="style:idhashref, id:hash" />
-    <element name="color_change_button" parents="plane, group" attributes="style:idhashref, enable_long_press_text_auto_scroll:int, id:hash, texture:idhashref" />
-    <element name="color_shift_button" parents="list_item, group" attributes="press_color:floatarray, style:idhashref, enable_long_press_text_auto_scroll:int, id:hash, default_color:floatarray" />
-    <element name="directbar" parents="template" attributes="style:idhashref, launchbtn_y:float, balloon_type:int, texture:idhashref, label:idhashref, hitmargin:float, id:hash" />
-    <element name="drop_shadow_button" parents="group, plane, color_shift_button, text, template" attributes="shadow_color:floatarray, shadow_press_blur_factor:float, shadow_scale:floatarray, shadow_texture_no:int, shadow_press_pos:floatarray, shadow_pos:floatarray, texture:idhashref, shadow_ofs:floatarray, shadow_press_color:floatarray, style:idhashref, enable_long_press_text_auto_scroll:int, shadow_blur_factor:float, id:hash" />
-    <element name="five_star_plane" parents="template, group, box" attributes="off_texture:idhashref, style:idhashref, id:hash, on_texture:idhashref" />
-    <element name="id" parents="idtable" attributes="id:hash" />
-    <element name="idtable" parents="resource" />
-    <element name="image_slidebar" parents="box" attributes="style:idhashref, base_mode:int, texture:idhashref, texture_bar:idhashref, tex_mode:int, id:hash" />
-    <element name="list_edge" parents="template" attributes="style:idhashref, id:hash" />
-    <element name="num_spin" parents="box" attributes="id:hash, loop:int" />
-    <element name="override_alias" parents="alias" attributes="model_type:int, org_id:idhashref" />
-    <element name="override_template_ref" parents="template_ref" attributes="resolution:hash, template:idhashref" />
-    <element name="override_texture" parents="texture" attributes="model_type:int, src:file, origsize:int, compress:string, type:string, margin_v:intarray, margin_h:intarray, ignore_make_surface_first:string" />
-    <element name="plane_shadow" parents="page, box" attributes="style:idhashref, id:hash" />
-    <element name="progressbar" parents="box, plane, button, template, group, page, plane_button" attributes="style:idhashref, label_pos_mode:int, id:hash, w_label:hash, signal_anim:int, label_mode:int, label_margin:float, bar_mode:int" />
-    <element name="slidebar" parents="plane, group" attributes="style:idhashref, min_label_margin:float, min_label_mode:int, max_label_mode:int, w_max_label:hash, max_label_pos_mode:int, w_min_label:hash, touch_mode:int, slider_size:floatarray, max_label_margin:float, min_label_pos_mode:int, id:hash, slider_label_margin:float, slider_label_mode:int, slider_label_pos_mode:int, w_slider_label:hash" />
-    <element name="sliding_drawer" parents="page" attributes="style:idhashref, id:hash" />
-    <element name="sound_banner_button" parents="soundindextable" attributes="id:idhash, decide:idhashref" />
-    <element name="sound_check_box" parents="soundindextable" attributes="uncheck:idhashref, check:idhashref, id:idhash" />
-    <element name="sound_composite_button" parents="soundindextable" attributes="id:idhash, decide:idhashref" />
-    <element name="sound_corner_button" parents="soundindextable" attributes="id:idhash, decide:idhashref" />
-    <element name="sound_file_list" parents="soundindextable" attributes="id:idhash" />
-    <element name="sound_image_button" parents="soundindextable" attributes="id:idhash, decide:idhashref" />
-    <element name="sound_list_item" parents="soundindextable" attributes="id:idhash" />
-    <element name="sound_list_view" parents="soundindextable" attributes="id:idhash" />
-    <element name="sound_mapview" parents="soundindextable" attributes="id:idhash" />
-    <element name="sound_plane_button" parents="soundindextable" attributes="id:idhash, decide:idhashref" />
-    <element name="sound_radio_button" parents="soundindextable" attributes="id:idhash, decide:idhashref" />
-    <element name="sound_rich_text" parents="soundindextable" attributes="id:idhash" />
-    <element name="sound_scroll_view" parents="soundindextable" attributes="id:idhash" />
-    <element name="sound_scrollbar_touch" parents="soundindextable" attributes="page_scroll:idhashref, drag_begin:idhashref, drag_end:idhashref, id:idhash, page_scroll_repeat:idhashref" />
-    <element name="sound_text" parents="soundindextable" attributes="id:idhash, link_tapped:idhashref" />
-    <element name="sound_text_box" parents="soundindextable" attributes="tapped:idhashref, id:idhash, link_tapped:idhashref" />
-    <element name="sound_thumbnail_button" parents="soundindextable" attributes="id:idhash, decide:idhashref" />
-    <element name="sound_update_button" parents="soundindextable" attributes="id:idhash, decide:idhashref" />
-    <element name="sound_webview" parents="soundindextable" attributes="id:idhash" />
-    <element name="sounddata" parents="sounddatatable" attributes="src:file, rate:int, type:string, id:idhash, right:file, left:file" />
-    <element name="sounddatatable" parents="resource" />
-    <element name="style_app_icon_simple" parents="styletable" attributes="id:idhash" />
-    <element name="style_banner_button" parents="styletable" attributes="color:floatarray, sound:idhashref, id:idhash, bg_obj:hash, glow_obj:hash" />
-    <element name="style_browser_rich_text" parents="styletable" attributes="bg_obj:hash, id:idhash" />
-    <element name="style_button_base" parents="styletable" attributes="color:floatarray, id:idhash" />
-    <element name="style_check_box" parents="styletable" attributes="sound:idhashref, glow_obj:hash, color:floatarray, left_margin:float, frame_num:int, image_obj:hash, id:idhash" />
-    <element name="style_color_change_button" parents="styletable" attributes="color:floatarray, bg_obj:hash, id:idhash" />
-    <element name="style_color_shift_button" parents="styletable" attributes="color:floatarray, id:idhash" />
-    <element name="style_dialog" parents="styletable" attributes="color:floatarray, id:idhash" />
-    <element name="style_directbar" parents="styletable" attributes="balloon_obj:hash, color:floatarray, launchbtn_obj:hash, label_obj:hash, bg_obj:hash, id:idhash" />
-    <element name="style_drop_shadow_button" parents="styletable" attributes="color:floatarray, bg_obj:hash, id:idhash" />
-    <element name="style_drop_shadow_plane" parents="styletable" attributes="color:floatarray, id:idhash, planeobj:hash" />
-    <element name="style_file_list" parents="styletable" attributes="color:floatarray, bg_obj:hash, id:idhash, sbar_v_margin:floatarray, sound:idhashref" />
-    <element name="style_five_star_plane" parents="styletable" attributes="color:floatarray, id:idhash, planeobj:hash" />
-    <element name="style_group" parents="styletable" attributes="id:idhash" />
-    <element name="style_image_slidebar" parents="styletable" attributes="base_obj:hash, id:idhash, bar_obj:hash" />
-    <element name="style_list_edge" parents="styletable" attributes="bottom_margin:float, top_margin:float, id:idhash, bottom_gradient:float, bottom_intercept:float" />
-    <element name="style_mapview" parents="styletable" attributes="color:floatarray, sound:idhashref, bg_obj:hash, id:idhash" />
-    <element name="style_page" parents="styletable" attributes="id:idhash" />
-    <element name="style_plane_shadow" parents="styletable" attributes="shadow_obj:hash, id:idhash, planeobj:hash" />
-    <element name="style_progressbar" parents="styletable" attributes="base_obj:hash, bar_fore_obj:hash, id:idhash, shadow_margin:floatarray, shadow_offset:floatarray, glow_obj:hash, bar_shadow_obj:hash, bar_back_obj:hash, signal_obj:hash, base_shadow_obj:hash, anim_func:int" />
-    <element name="style_radio_box" parents="styletable" attributes="id:idhash" />
-    <element name="style_scrollbar" parents="styletable" attributes="min_size:float, base_obj:hash, slider_obj:hash, id:idhash, jet_tail_obj:hash" />
-    <element name="style_scrollbar2d" parents="styletable" attributes="base_obj:hash, id:idhash" />
-    <element name="style_scrollbar_touch" parents="styletable" attributes="min_size:float, base_obj:hash, slider_obj:hash, slider_glow_obj:hash, id:idhash, sound:idhashref" />
-    <element name="style_slidebar" parents="styletable" attributes="base_obj:hash, slider_obj:hash, id:idhash, bar_obj:hash, slider_glow_obj:hash, color:floatarray" />
-    <element name="style_sliding_drawer" parents="styletable" attributes="color:floatarray, id:idhash" />
-    <element name="style_speech_balloon" parents="styletable" attributes="shadow_obj:hash, id:idhash, planeobj:hash, color:floatarray" />
-    <element name="style_thumbnail_button" parents="styletable" attributes="color:floatarray, sound:idhashref, id:idhash, bg_obj:hash, glow_obj:hash" />
-    <element name="style_update_button" parents="styletable" attributes="image_obj:hash, arrow_obj:hash, glow_obj:hash, id:idhash" />
-    <element name="style_webview" parents="styletable" attributes="color:floatarray, sound:idhashref, bg_obj:hash, id:idhash" />
-    <element name="style_xm_list" parents="styletable" attributes="color:floatarray, id:idhash" />
-    <element name="thumbnail_button" parents="template" attributes="style:idhashref, id:hash" />
-    <element name="update_button" parents="group, plane" attributes="sound:idhashref, style:idhashref, id:hash" />
-    <element name="xm_list" parents="template" attributes="style:idhashref, id:hash" />
+  <element name="alias" parents="aliastable" attributes="org_id:idhashref, id:idhash"/>
+  <element name="aliastable" parents="resource"/>
+  <element name="app_icon_simple" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, dialog, box, button, group, image_button" attributes="style:idhashref, id:hash, texture:idhashref, appearance:int, enable_tap:int"/>
+  <element name="banner_button" parents="list_item" attributes="style:idhashref, id:hash"/>
+  <element name="box" parents="speech_balloon, template, plane, dialog, box, scroll_view, list_view, group, rich_text, button, list_item, radio_box, radio_button, page, composite_drawer, plane_button, image_button" attributes="scroll_view:idhashref, style:idhashref, exclusive_list:string, id:hash, hit_ignore:int, texture:idhashref"/>
+  <element name="browser_rich_text" parents="group, box" attributes="style:idhashref, id:hash, w_sbar_v:hash"/>
+  <element name="busyindicator" parents="page, plane, group, list_item, text, list_view, template, box, scroll_view, rich_text, button" attributes="style:idhashref, id:hash, texture:idhashref"/>
+  <element name="button" parents="list_item, page, template, scroll_view, list_view, box, plane, group, button, rich_text, text_box, text, image_button, pagetable, composite_drawer, plane_shadow, speech_balloon" attributes="sound:idhashref, list_view:idhashref, style:idhashref, enable:int, enable_long_press_text_auto_scroll:int, scroll_view:idhashref, id:hash, texture:idhashref, label:idhashref"/>
+  <element name="button_base" parents="template" attributes="style:idhashref, id:hash"/>
+  <element name="check_box" parents="box, page, list_view, text, rich_text, group, button, plane, list_item, template, text_box, image_button" attributes="style:idhashref, id:hash, sound:idhashref"/>
+  <element name="color_change_button" parents="plane, group" attributes="style:idhashref, enable_long_press_text_auto_scroll:int, id:hash, texture:idhashref"/>
+  <element name="color_shift_button" parents="list_item, group" attributes="press_color:floatarray, style:idhashref, enable_long_press_text_auto_scroll:int, id:hash, default_color:floatarray"/>
+  <element name="composite_button" parents="list_item, page, template, scroll_view, list_view, box, plane, group" attributes="sound:idhashref, style:idhashref, scroll_view:idhashref, label:idhashref, list_view:idhashref, enable_long_press_text_auto_scroll:int, id:hash, str1:idhashref, tex0:idhashref"/>
+  <element name="composite_drawer" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, group, box, button_base" attributes="style:idhashref, id:hash"/>
+  <element name="corner_button" parents="page, plane, template, group, pagetable" attributes="style:idhashref, id:hash"/>
+  <element name="dialog" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, group" attributes="style:idhashref, exclusive_list:string, id:hash"/>
+  <element name="directbar" parents="template" attributes="style:idhashref, launchbtn_y:float, balloon_type:int, texture:idhashref, label:idhashref, hitmargin:float, id:hash"/>
+  <element name="drop_shadow_button" parents="group, plane, color_shift_button, text, template" attributes="shadow_color:floatarray, shadow_press_blur_factor:float, shadow_scale:floatarray, shadow_texture_no:int, shadow_press_pos:floatarray, shadow_pos:floatarray, texture:idhashref, shadow_ofs:floatarray, shadow_press_color:floatarray, style:idhashref, enable_long_press_text_auto_scroll:int, shadow_blur_factor:float, id:hash"/>
+  <element name="file" parents="filetable" attributes="origsize:int, src:file, compress:string, id:idhash, type:string"/>
+  <element name="file_list" parents="page, composite_drawer, group, plane, template, box" attributes="style:idhashref, id:hash"/>
+  <element name="filetable" parents="resource"/>
+  <element name="five_star_plane" parents="template, group, box" attributes="off_texture:idhashref, style:idhashref, id:hash, on_texture:idhashref"/>
+  <element name="focus_hint" parents="plane, button, plane_button, corner_button, radio_button, text, rich_text, check_box, list_item, busyindicator, scroll_view, list_view, text_box, image_button, composite_button, color_change_button, drop_shadow_button, color_shift_button, update_button, num_spin, group, app_icon_simple, file_list, box, button_base" attributes="direct_key:int, focus_offset:floatarray, focus_rot:floatarray, right_id:hash, down_id:hash, focus_shape:int, left_id:hash, up_id:hash, focus_size:floatarray, enable:int, focus_texture:idhashref"/>
+  <element name="group" parents="pagetable, template, group, page, plane, list_item, box, scroll_view, rich_text, plane_shadow, plane_button" attributes="id:hash"/>
+  <element name="id" parents="idtable" attributes="id:hash"/>
+  <element name="idtable" parents="resource"/>
+  <element name="image_button" parents="list_item, page, template, scroll_view, list_view, box, plane, group" attributes="sound:idhashref, list_view:idhashref, style:idhashref, enable_long_press_text_auto_scroll:int, scroll_view:idhashref, id:hash, texture:idhashref, label:idhashref, enable:int"/>
+  <element name="image_slidebar" parents="box" attributes="style:idhashref, base_mode:int, texture:idhashref, texture_bar:idhashref, tex_mode:int, id:hash"/>
+  <element name="layout_box" parents="box, radio_box" attributes="origin:intarray, bottom_margin:float, children_adjust_y:int, children_adjust_x:int, top_margin:float, pos:floatarray, left_margin:float, id:hash, size:floatarray, boundary_mode_x:int, space:float, right_margin:float, children_width:float, children_height:float, align:intarray, boundary_mode_y:int, space_adjust:int, adjust:intarray, layout_type:int, anchor:intarray, children_align_x:int, children_align_y:int, min_size:floatarray, max_size:floatarray, alpha:float"/>
+  <element name="layout_dialog" parents="dialog" attributes="min_size:floatarray, align:intarray, adjust:intarray, id:hash, anchor:intarray, children_adjust_y:int, children_adjust_x:int, layout_type:int, pos:floatarray, size:floatarray"/>
+  <element name="layout_hint" parents="pageturn, speech_balloon, plane, button, plane_button, radio_button, text, rich_text, check_box, list_item, progressbar_touch, busyindicator, scroll_view, list_view, text_box, scrollbar, scrollbar_touch, file_list, composite_drawer, image_button, composite_button, corner_button, webview, app_icon_simple, group, color_change_button, drop_shadow_button, box, color_shift_button, progressbar, radio_box, five_star_plane, browser_rich_text, thumbnail_button, image_slidebar, sliding_drawer, update_button, directbar, template, slidebar, page, plane_shadow, num_spin, list_edge, style_plane, button_base" attributes="origin:intarray, adjust:intarray, id:hash, anchor:intarray, color:floatarray, alpha:float, align:intarray, rot:floatarray, pos:floatarray, size:floatarray"/>
+  <element name="list_edge" parents="template" attributes="style:idhashref, id:hash"/>
+  <element name="list_item" parents="template, list_view, box, group, list_item" attributes="style:idhashref, id:hash, text_auto_scroll_target:hash"/>
+  <element name="list_view" parents="page, box, plane, group, template, plane_shadow" attributes="cell_size_initial_default:floatarray, w_sbar_v:hash, style:idhashref, id:hash, sbar_fadeout_time:float, sound:idhashref, w_sbar_h:hash"/>
+  <element name="locale" parents="stringtable" attributes="origsize:int, src:file, compress:string, id:id"/>
+  <element name="num_spin" parents="box" attributes="id:hash, loop:int"/>
+  <element name="override_alias" parents="alias" attributes="model_type:int, org_id:idhashref"/>
+  <element name="override_template_ref" parents="template_ref" attributes="resolution:hash, template:idhashref"/>
+  <element name="override_texture" parents="texture" attributes="model_type:int, src:file, origsize:int, compress:string, type:string, margin_v:intarray, margin_h:intarray, ignore_make_surface_first:string"/>
+  <element name="page" parents="pagetable" attributes="id:idhash, origin:intarray, style:idhashref, template:idhashref, layouter:string"/>
+  <element name="pagetable" parents="resource"/>
+  <element name="pageturn" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, dialog, box, button, group, image_button, radio_box" attributes="style:idhashref, id:hash, texture:idhashref"/>
+  <element name="plane" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, dialog, box, button, group, image_button, radio_box, drop_shadow_button, color_shift_button, sliding_drawer, progressbar_touch, plane_button, text_box, slidebar, pagetable, plane_shadow, list_edge, app_icon_simple, check_box, composite_button" attributes="style:idhashref, id:hash, texture:idhashref, hit_ignore:int"/>
+  <element name="plane_button" parents="plane, list_item, page, template, scroll_view, list_view, box, group, progressbar_touch, text_box, app_icon_simple, composite_button, composite_drawer, text" attributes="sound:idhashref, style:idhashref, scroll_view:idhashref, label:idhashref, list_view:idhashref, enable_long_press_text_auto_scroll:int, id:hash, texture:idhashref, enable:int"/>
+  <element name="plane_shadow" parents="page, box" attributes="style:idhashref, id:hash"/>
+  <element name="planeobj" parents="style_pageturn, style_list_view, style_plane, style_text, style_rich_text, style_text_box, style_list_item, style_button, style_plane_button, style_corner_button, style_image_button, style_composite_drawer, style_composite_button, style_progressbar_touch, style_radio_button, style_drop_shadow_plane, style_drop_shadow_button, style_color_change_button, style_scrollbar, style_scrollbar_touch, style_box, style_speech_balloon, style_image_slidebar, style_scroll_view, style_banner_button, style_browser_rich_text, style_five_star_plane, style_thumbnail_button, style_file_list, style_progressbar, style_update_button, style_directbar, style_slidebar, style_check_box, style_plane_shadow, style_scrollbar2d, style_webview, style_mapview" attributes="texture0:idhashref, scale_mode_y:int, scale_mode_x:int, pos:floatarray, tex_region:floatarray, reduce_transparency:int, id:hash, color:floatarray, size:floatarray, align_y:int, align_x:int, blend:int, scale_value:floatarray, texture1:idhashref"/>
+  <element name="progressbar" parents="box, plane, button, template, group, page, plane_button" attributes="style:idhashref, label_pos_mode:int, id:hash, w_label:hash, signal_anim:int, label_mode:int, label_margin:float, bar_mode:int"/>
+  <element name="progressbar_touch" parents="template, plane, page, scroll_view, list_view, text, rich_text, group" attributes="list_view:idhashref, style:idhashref, label_pos_mode:int, label_margin:float, scroll_view:idhashref, w_label:hash, id:hash, label_mode:int, label:idhashref, bar_mode:int"/>
+  <element name="radio_box" parents="speech_balloon, template, plane, dialog, box, scroll_view, list_view, group, text, page" attributes="id:hash"/>
+  <element name="radio_button" parents="list_item, page, group, box, radio_box, template" attributes="style:idhashref, id:hash, label:idhashref, tuck:int"/>
+  <element name="resolution" parents="layout_hint, layout_box" attributes="origin:intarray, adjust:intarray, id:hash, anchor:intarray, color:floatarray, alpha:float, align:intarray, rot:floatarray, pos:floatarray, size:floatarray"/>
+  <element name="resource" attributes="version:float, type:string, id:idhash"/>
+  <element name="rich_text" parents="button, box, page, text, rich_text, plane, dialog, scroll_view, template, group" attributes="style:idhashref, auto_scroll:int, scroll_view:idhashref, w_sbar_v:hash, label:idhashref, id:hash, selection_mode:int"/>
+  <element name="scroll_view" parents="page, group, plane, template, box, list_item, plane_shadow" attributes="sbar_fadeout_time:float, style:idhashref, default_dir:int, w_sbar_h:hash, edit_auto_transition_mode:int, w_sbar_v:hash, snap_power:float, auto_snap:int, snap_anim_time:float, id:hash"/>
+  <element name="scrollbar" parents="rich_text, page, plane, list_view, box, group, browser_rich_text, scroll_view, template" attributes="style:idhashref, scroll_type:int, id:hash"/>
+  <element name="scrollbar_touch" parents="page, box, list_view, group, text_box, rich_text, scroll_view" attributes="style:idhashref, id:hash, sound:idhashref, scroll_type:int"/>
+  <element name="slidebar" parents="plane, group" attributes="style:idhashref, min_label_margin:float, min_label_mode:int, max_label_mode:int, w_max_label:hash, max_label_pos_mode:int, w_min_label:hash, touch_mode:int, slider_size:floatarray, max_label_margin:float, min_label_pos_mode:int, id:hash, slider_label_margin:float, slider_label_mode:int, slider_label_pos_mode:int, w_slider_label:hash"/>
+  <element name="sliding_drawer" parents="page" attributes="style:idhashref, id:hash"/>
+  <element name="sound_banner_button" parents="soundindextable" attributes="id:idhash, decide:idhashref"/>
+  <element name="sound_button" parents="soundindextable" attributes="id:idhash, decide:idhashref, press:idhashref, move_out:idhashref, long_press:idhashref"/>
+  <element name="sound_check_box" parents="soundindextable" attributes="uncheck:idhashref, check:idhashref, id:idhash"/>
+  <element name="sound_composite_button" parents="soundindextable" attributes="id:idhash, decide:idhashref"/>
+  <element name="sound_corner_button" parents="soundindextable" attributes="id:idhash, decide:idhashref"/>
+  <element name="sound_file_list" parents="soundindextable" attributes="id:idhash"/>
+  <element name="sound_image_button" parents="soundindextable" attributes="id:idhash, decide:idhashref"/>
+  <element name="sound_list_item" parents="soundindextable" attributes="id:idhash"/>
+  <element name="sound_list_view" parents="soundindextable" attributes="id:idhash"/>
+  <element name="sound_mapview" parents="soundindextable" attributes="id:idhash"/>
+  <element name="sound_plane_button" parents="soundindextable" attributes="id:idhash, decide:idhashref"/>
+  <element name="sound_radio_button" parents="soundindextable" attributes="id:idhash, decide:idhashref"/>
+  <element name="sound_rich_text" parents="soundindextable" attributes="id:idhash"/>
+  <element name="sound_scroll_view" parents="soundindextable" attributes="id:idhash"/>
+  <element name="sound_scrollbar_touch" parents="soundindextable" attributes="page_scroll:idhashref, drag_begin:idhashref, drag_end:idhashref, id:idhash, page_scroll_repeat:idhashref"/>
+  <element name="sound_text" parents="soundindextable" attributes="id:idhash, link_tapped:idhashref"/>
+  <element name="sound_text_box" parents="soundindextable" attributes="tapped:idhashref, id:idhash, link_tapped:idhashref"/>
+  <element name="sound_thumbnail_button" parents="soundindextable" attributes="id:idhash, decide:idhashref"/>
+  <element name="sound_update_button" parents="soundindextable" attributes="id:idhash, decide:idhashref"/>
+  <element name="sound_webview" parents="soundindextable" attributes="id:idhash"/>
+  <element name="sounddata" parents="sounddatatable" attributes="src:file, rate:int, type:string, id:idhash, right:file, left:file"/>
+  <element name="sounddatatable" parents="resource"/>
+  <element name="soundindextable" parents="resource"/>
+  <element name="speech_balloon" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, dialog, box, button, group, image_button" attributes="style:idhashref, id:hash, texture:idhashref"/>
+  <element name="stringtable" parents="resource"/>
+  <element name="style_app_icon_simple" parents="styletable" attributes="id:idhash"/>
+  <element name="style_banner_button" parents="styletable" attributes="color:floatarray, sound:idhashref, id:idhash, bg_obj:hash, glow_obj:hash"/>
+  <element name="style_box" parents="styletable" attributes="color:floatarray, id:idhash, planeobj:hash"/>
+  <element name="style_browser_rich_text" parents="styletable" attributes="bg_obj:hash, id:idhash"/>
+  <element name="style_busyindicator" parents="styletable" attributes="color:floatarray, ball_color:floatarray, ball_size:float, id:idhash"/>
+  <element name="style_button" parents="styletable" attributes="sound:idhashref, key_focus:int, bottom_margin:float, glow_obj:hash, right_margin:float, color:floatarray, highlight_obj:hash, top_margin:float, planeobj:hash, left_margin:float, focus_in_group:int, label_obj:hash, direct_key:int, bg_obj:hash, adjust_min_size:floatarray, id:idhash, adjust_max_size:floatarray, style_type:int"/>
+  <element name="style_button_base" parents="styletable" attributes="color:floatarray, id:idhash"/>
+  <element name="style_check_box" parents="styletable" attributes="sound:idhashref, glow_obj:hash, color:floatarray, left_margin:float, frame_num:int, image_obj:hash, id:idhash"/>
+  <element name="style_color_change_button" parents="styletable" attributes="color:floatarray, bg_obj:hash, id:idhash"/>
+  <element name="style_color_shift_button" parents="styletable" attributes="color:floatarray, id:idhash"/>
+  <element name="style_composite_button" parents="styletable" attributes="bottom_margin:float, right_margin:float, color:floatarray, glow_obj_id:int, top_margin:float, planeobj:hash, left_margin:float, bg_obj:hash, adjust_min_size:floatarray, id:idhash, sound:idhashref, glow_obj:hash, label_obj:hash"/>
+  <element name="style_composite_drawer" parents="styletable" attributes="textobj:hash, planeobj:hash, id:idhash"/>
+  <element name="style_corner_button" parents="styletable" attributes="sound:idhashref, key_focus:int, bottom_margin:float, glow_obj:hash, right_margin:float, color:floatarray, highlight_obj:hash, top_margin:float, planeobj:hash, left_margin:float, focus_in_group:int, label_obj:hash, direct_key:int, bg_obj:hash, adjust_min_size:floatarray, id:idhash, layout_type:int, corner_obj:hash"/>
+  <element name="style_dialog" parents="styletable" attributes="color:floatarray, id:idhash"/>
+  <element name="style_directbar" parents="styletable" attributes="balloon_obj:hash, color:floatarray, launchbtn_obj:hash, label_obj:hash, bg_obj:hash, id:idhash"/>
+  <element name="style_drop_shadow_button" parents="styletable" attributes="color:floatarray, bg_obj:hash, id:idhash"/>
+  <element name="style_drop_shadow_plane" parents="styletable" attributes="color:floatarray, id:idhash, planeobj:hash"/>
+  <element name="style_file_list" parents="styletable" attributes="color:floatarray, bg_obj:hash, id:idhash, sbar_v_margin:floatarray, sound:idhashref"/>
+  <element name="style_five_star_plane" parents="styletable" attributes="color:floatarray, id:idhash, planeobj:hash"/>
+  <element name="style_group" parents="styletable" attributes="id:idhash"/>
+  <element name="style_image_button" parents="styletable" attributes="style_type:int, sound:idhashref, bottom_margin:float, layout_type_x:int, glow_obj:hash, right_margin:float, color:floatarray, image_back_obj:hash, top_margin:float, planeobj:hash, left_margin:float, layout_type_y:int, label_obj:hash, direct_key:int, bg_obj:hash, adjust_min_size:floatarray, image_obj:hash, image_margin:float, id:idhash, focus_in_group:int, highlight_obj:hash, key_focus:int"/>
+  <element name="style_image_slidebar" parents="styletable" attributes="base_obj:hash, id:idhash, bar_obj:hash"/>
+  <element name="style_list_edge" parents="styletable" attributes="bottom_margin:float, top_margin:float, id:idhash, bottom_gradient:float, bottom_intercept:float"/>
+  <element name="style_list_item" parents="styletable" attributes="sound:idhashref, textobj:hash, color:floatarray, planeobj:hash, bg_obj:hash, id:idhash"/>
+  <element name="style_list_view" parents="styletable" attributes="sound:idhashref, color:floatarray, bg_obj:hash, cell_size_initial_default:floatarray, id:idhash, sbar_v_margin:floatarray"/>
+  <element name="style_mapview" parents="styletable" attributes="color:floatarray, sound:idhashref, bg_obj:hash, id:idhash"/>
+  <element name="style_page" parents="styletable" attributes="id:idhash"/>
+  <element name="style_pageturn" parents="styletable" attributes="color:floatarray, label_obj:hash, sound:idhashref, id:idhash, turn_obj:hash"/>
+  <element name="style_plane" parents="styletable" attributes="color:floatarray, planeobj:hash, id:idhash"/>
+  <element name="style_plane_button" parents="styletable" attributes="sound:idhashref, base_obj:hash, bottom_margin:float, glow_obj:hash, right_margin:float, color:floatarray, id:idhash, top_margin:float, planeobj:hash, left_margin:float, focus_in_group:int, label_obj:hash, direct_key:int, adjust_min_size:floatarray, image_obj:hash, key_focus:int"/>
+  <element name="style_plane_shadow" parents="styletable" attributes="shadow_obj:hash, id:idhash, planeobj:hash"/>
+  <element name="style_progressbar" parents="styletable" attributes="base_obj:hash, bar_fore_obj:hash, id:idhash, shadow_margin:floatarray, shadow_offset:floatarray, glow_obj:hash, bar_shadow_obj:hash, bar_back_obj:hash, signal_obj:hash, base_shadow_obj:hash, anim_func:int"/>
+  <element name="style_progressbar_touch" parents="styletable" attributes="slider_glow_obj:hash, bar_fore_obj:hash, shadow_offset:floatarray, id:idhash, base_obj:hash, slider_obj:hash, glow_obj:hash, bar_shadow_obj:hash, signal_obj:hash, bar_back_obj:hash, shadow_margin:floatarray, base_shadow_obj:hash"/>
+  <element name="style_radio_box" parents="styletable" attributes="id:idhash"/>
+  <element name="style_radio_button" parents="styletable" attributes="style_type:int, sound:idhashref, bottom_margin:float, layout_type_x:int, glow_obj:hash, right_margin:float, color:floatarray, image_back_obj:hash, top_margin:float, planeobj:hash, left_margin:float, layout_type_y:int, label_obj:hash, direct_key:int, bg_obj:hash, adjust_min_size:floatarray, image_obj:hash, image_margin:float, id:idhash, focus_in_group:int, frame_num:int"/>
+  <element name="style_rich_text" parents="styletable" attributes="id:idhash, color:floatarray, textobj:hash, planeobj:hash, bg_obj:hash"/>
+  <element name="style_scroll_view" parents="styletable" attributes="sound:idhashref, max_view_size:floatarray, id:idhash, auto_snap:int, color:floatarray, auto_bound:int, manual_view_box:floatarray, min_view_size:floatarray, sbar_v_margin:floatarray, bg_obj:hash"/>
+  <element name="style_scrollbar" parents="styletable" attributes="min_size:float, base_obj:hash, slider_obj:hash, id:idhash, jet_tail_obj:hash"/>
+  <element name="style_scrollbar2d" parents="styletable" attributes="base_obj:hash, id:idhash"/>
+  <element name="style_scrollbar_touch" parents="styletable" attributes="min_size:float, base_obj:hash, slider_obj:hash, slider_glow_obj:hash, id:idhash, sound:idhashref"/>
+  <element name="style_slidebar" parents="styletable" attributes="base_obj:hash, slider_obj:hash, id:idhash, bar_obj:hash, slider_glow_obj:hash, color:floatarray"/>
+  <element name="style_sliding_drawer" parents="styletable" attributes="color:floatarray, id:idhash"/>
+  <element name="style_speech_balloon" parents="styletable" attributes="shadow_obj:hash, id:idhash, planeobj:hash, color:floatarray"/>
+  <element name="style_text" parents="styletable" attributes="color:floatarray, textobj:hash, adjust_min_size:floatarray, planeobj:hash, id:idhash, bottom_margin:float, right_margin:float, top_margin:float, left_margin:float, sound:idhashref"/>
+  <element name="style_text_box" parents="styletable" attributes="bottom_margin:float, right_margin:float, color:floatarray, top_margin:float, planeobj:hash, left_margin:float, textobj:hash, id:idhash, sound:idhashref, glowobj:hash, glow_max:int"/>
+  <element name="style_thumbnail_button" parents="styletable" attributes="color:floatarray, sound:idhashref, id:idhash, bg_obj:hash, glow_obj:hash"/>
+  <element name="style_update_button" parents="styletable" attributes="image_obj:hash, arrow_obj:hash, glow_obj:hash, id:idhash"/>
+  <element name="style_web_view" parents="styletable" attributes="url_field:idhashref, reload_btn:idhashref, id:idhash, back_btn:idhashref, home_url:string, title_field:idhashref, forward_btn:idhashref, progressbar:idhashref"/>
+  <element name="style_webview" parents="styletable" attributes="color:floatarray, sound:idhashref, bg_obj:hash, id:idhash"/>
+  <element name="style_xm_list" parents="styletable" attributes="color:floatarray, id:idhash"/>
+  <element name="styletable" parents="resource"/>
+  <element name="template" parents="templatetable" attributes="fast_open:int, id:idhash"/>
+  <element name="template_ref" parents="box, list_view, scroll_view, page, list_item, composite_drawer, plane, group, template, plane_button, button" attributes="id:hash, template:idhashref"/>
+  <element name="templatetable" parents="resource"/>
+  <element name="text" parents="button, box, page, text, rich_text, plane, dialog, scroll_view, template, progressbar_touch, image_button, group, drop_shadow_button, list_item, color_shift_button, progressbar, plane_button, text_box, list_view, radio_button, plane_shadow, slidebar, pagetable, check_box" attributes="style:idhashref, auto_scroll:int, scroll_view:hash, id:hash, label:idhashref, selection_mode:int, long_press_text_auto_scroll_mode:int, texture:idhashref, auto_link_detect:int, url_scheme:int, label_alias:idhashref, disable_auto_scroll:int, auto_scroll_target_friend:hash"/>
+  <element name="text_box" parents="template, plane, page, scroll_view, list_view, text, rich_text, box, group, plane_shadow, list_item, plane_button" attributes="ime_languages_forced:int, style:idhashref, auto_scroll:int, scroll_view:hash, ime_type:int, label:idhashref, list_view:idhashref, edit_mode:int, selection_mode:int, edit_auto_transition_mode:int, max_length:int, ime_supported_languages:int, ime_option:int, placeholder:idhashref, id:hash, password_mode:int, paste_mode:int, sound:idhashref, texture:idhashref, v_scrollbar:hash"/>
+  <element name="textobj" parents="style_pageturn, style_text, style_rich_text, style_button, style_plane_button, style_text_box, style_image_button, style_composite_drawer, style_composite_button, style_radio_button, style_directbar" attributes="shadow_color:floatarray, family:int, align_y:int, align_x:int, underline_color:floatarray, max_line_count:int, enlarge_line_pitch:int, word_wrap:int, emboss:int, id:hash, size:floatarray, strike_color:floatarray, back_color:floatarray, text_align:int, adjust_x:int, adjust_y:int, ellipsis:int, text_shadow:int, line_space:float, bold:int, pos:floatarray, line_pitch:float, shadow:int, color:floatarray, font_size:float, font_color:floatarray, visible_size:floatarray, oblique:int, kinsoku:int, visible_pos:floatarray, underline:int, strike:int, mask:int, condense_x:int, enlarge_font_size:int, force_bold:int, deepen_color:int"/>
+  <element name="texture" parents="texturetable" attributes="src:file, margin_h:intarray, ignore_make_surface_first:string, origsize:int, type:string, id:idhash, div_ratio_h:floatarray, compress:string, margin_v:intarray, div_mode:string, div_ratio_v:floatarray, div_ratio_stretch:floatarray"/>
+  <element name="texturetable" parents="resource"/>
+  <element name="thumbnail_button" parents="template" attributes="style:idhashref, id:hash"/>
+  <element name="update_button" parents="group, plane" attributes="sound:idhashref, style:idhashref, id:hash"/>
+  <element name="webview" parents="page, list_item, template, plane, scroll_view, list_view, text, rich_text, dialog, box, button, group" attributes="style:idhashref, id:hash, texture:idhashref"/>
+  <element name="xm_list" parents="template" attributes="style:idhashref, id:hash"/>
 </cxml>
