@@ -9,5 +9,5 @@ Another CXML (De)Compiler
 * Supports already hashed idhash fields (e.g. from other decompilators, `id="0xDEADBEEF"` will be put into idhash table as is)
 
 ## Credits
-* [PoS](https://github.com/Princess-of-Sleeping) for rco decompiler
+* [PoS](https://github.com/Princess-of-Sleeping) for rco decompiler and more/proper definitions
 * [Graphene](https://github.com/GrapheneCt) for rcs/rco schema, testing
