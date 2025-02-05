@@ -477,7 +477,8 @@ cxml::Tag* Compiler::iterate_tree(tinyxml2::XMLElement* el, cxml::Tag* prevtag, 
         bool found = false;
         for (auto& v: elem_schema.parents)
         {
-            if (v == parent->Value())
+            const char* pv = parent->Value();
+            if (pv && v == pv)
             {
                 found = true;
                 break;
